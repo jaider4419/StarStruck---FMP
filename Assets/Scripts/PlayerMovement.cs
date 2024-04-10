@@ -1,34 +1,42 @@
+using System.Collections;
+
+
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Security.Cryptography;
+using System.Threading;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class ThirdPersonMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Movement speed of the player
-    public float jumpForce = 10f; // Force applied when jumping
-    public LayerMask groundLayer; // Layer mask to determine ground
+    public CharacterController controller;
+    public Transform cam;
 
-    private Rigidbody rb;
-    private bool isGrounded;
+    public float speed = 6;
+
+    float turnSmoothVelocity;
+    public float turnSmoothTime = 0.1f;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        // Check if the player is grounded
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        // Horizontal movement
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-        rb.velocity = new Vector3(moveDirection.x * moveSpeed, rb.velocity.y, moveDirection.z * moveSpeed);
-
-        // Jumping
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (direction.magnitude >= 0.1f)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
     }
 }
