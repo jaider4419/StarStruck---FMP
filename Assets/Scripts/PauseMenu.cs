@@ -24,6 +24,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        Cursor.visible = false; // Hide cursor when resuming
+        Cursor.lockState = CursorLockMode.Locked; // Lock cursor when resuming
     }
 
     void Pause()
@@ -31,6 +33,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        Cursor.visible = true; // Show cursor when pausing
+        Cursor.lockState = CursorLockMode.None; // Unlock cursor when pausing
     }
 
     public void LoadMainMenu()
@@ -45,4 +49,3 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 }
-
