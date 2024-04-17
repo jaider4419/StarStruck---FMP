@@ -92,6 +92,8 @@ public class DialogueTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inTrigger = false;
+            Destroy(gameObject);
+            dialoguePanel.gameObject.SetActive(false);
         }
     }
 
@@ -124,5 +126,6 @@ public class DialogueTrigger : MonoBehaviour
         // Hide the dialogue panel
         dialoguePanel.SetActive(false);
         dialoguesStarted = false;
+        Destroy(gameObject);
     }
 }
