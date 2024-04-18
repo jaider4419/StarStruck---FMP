@@ -7,6 +7,9 @@ public class PauseMenu : MonoBehaviour
     public string mainMenuSceneName = "MainMenu"; // Name of the main menu scene
     public AudioSource bgm;
     private bool isPaused = false;
+    private string nextSceneName = "FirstScene";
+
+
 
     void Update()
     {
@@ -45,6 +48,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
+
     public void QuitGame()
     {
         Debug.Log("Quitting game...");
@@ -54,9 +58,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene("FirstScene");
         Debug.Log("scene reloads");
         Cursor.lockState = CursorLockMode.Locked;
-
+        SceneManager.LoadScene(nextSceneName);
     }
 }
