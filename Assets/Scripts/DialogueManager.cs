@@ -6,8 +6,6 @@ public class DialogueTrigger : MonoBehaviour
     public GameObject dialoguePanel; // Reference to the UI panel containing the dialogue
     public TMP_Text dialogueText; // Reference to the TextMeshPro text component where the dialogue will be shown
     public string[] dialogues; // Array of dialogues to be displayed
-    public float baseLetterDelay = 0.1f; // Base delay between each letter
-    public float typingSpeedMultiplier = 1.0f; // Speed multiplier for typing
     public TMP_FontAsset dialogueFont; // Custom font for the dialogue text
 
     private bool isTyping = false;
@@ -43,7 +41,7 @@ public class DialogueTrigger : MonoBehaviour
                 else
                 {
                     // Calculate the time for the next letter, considering typing speed multiplier
-                    nextLetterTime = Time.time + baseLetterDelay * typingSpeedMultiplier;
+                    nextLetterTime = Time.time;
                 }
             }
         }
@@ -108,7 +106,7 @@ public class DialogueTrigger : MonoBehaviour
 
         // Start typing the current dialogue
         isTyping = true;
-        nextLetterTime = Time.time + baseLetterDelay * typingSpeedMultiplier;
+        nextLetterTime = Time.time;
 
         dialoguesStarted = true;
     }
