@@ -16,6 +16,10 @@ public class BattleSystem : MonoBehaviour
     Unit enemyUnit;
 
     public TextMeshProUGUI dialogueText;
+
+    public battleHUD playerHUD;
+    public battleHUD enemyHUD;
+
     public BattleState state;
 
     // Start is called before the first frame update
@@ -34,5 +38,8 @@ public class BattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+
+        playerHUD.SetHUD(playerUnit);
+        enemyHUD.SetHUD(enemyUnit);
     }
 }
