@@ -23,4 +23,8 @@ public class Chest : MonoBehaviour, IInteractable
         SceneManager.LoadScene(sceneName);
     }
 
+
+
+
+
 }

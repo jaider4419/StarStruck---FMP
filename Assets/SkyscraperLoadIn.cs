@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class SkyscraperLoadIn : MonoBehaviour
 {
+    public string sceneName;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Collided");
-            SceneManager.LoadScene("Skyscraper");
+            SceneManager.LoadScene(sceneName);
         }
     }
 }

@@ -34,6 +34,7 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+        Cursor.lockState = CursorLockMode.None;
     }
 
     IEnumerator SetupBattle()
