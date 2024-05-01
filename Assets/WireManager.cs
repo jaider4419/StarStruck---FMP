@@ -24,17 +24,17 @@ public class WireManager : MonoBehaviour
     void Update()
     {
         if (
-            pictures[2].rotation.z == 90 &&
-            pictures[3].rotation.z == 90 &&
-            pictures[4].rotation.z == 90 &&
-            pictures[5].rotation.z == 90 &&
-            pictures[6].rotation.z == 90 &&
-            pictures[7].rotation.z == 90 &&
-            pictures[8].rotation.z == 90 &&
-            pictures[12].rotation.z == 90 &&
-            pictures[13].rotation.z == 90 &&
-            pictures[16].rotation.z == 90 &&
-            pictures[17].rotation.z == 90)
+            pictures[2].rotation.z == 90f &&
+            pictures[3].rotation.z == 90f &&
+            pictures[4].rotation.z == 90f &&
+            pictures[5].rotation.z == 90f &&
+            pictures[6].rotation.z == 90f &&
+            pictures[7].rotation.z == 90f &&
+            pictures[8].rotation.z == 90f &&
+            pictures[12].rotation.z == 90f &&
+            pictures[13].rotation.z == 90f &&
+            pictures[16].rotation.z == 90f &&
+            pictures[17].rotation.z == 90f)
         {
             Won = true;
             winUI.SetActive(true);
