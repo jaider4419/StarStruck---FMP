@@ -30,4 +30,9 @@ public class Unit : MonoBehaviour
             currentHP = maxHP;
     }
 
+    public int GetRandomDamage(int minDamage, int maxDamage)
+    {
+        return Random.Range(minDamage, maxDamage + 1);
+    }
+
 }

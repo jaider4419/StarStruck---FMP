@@ -64,10 +64,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack(int playerIndex)
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnits[playerIndex].damage);
+        int damage = playerUnits[playerIndex].GetRandomDamage(5, 10); // Adjust the damage range as needed
+        bool isDead = enemyUnit.TakeDamage(damage);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogueText.text = playerNames[playerIndex] + "'s attack is successful!";
+        dialogueText.text = playerNames[playerIndex] + "'s attack deals " + damage + " damage!";
 
         yield return new WaitForSeconds(2f);
 
@@ -85,11 +86,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex] + "!";
+        int damage = enemyUnit.GetRandomDamage(8, 12); // Adjust the damage range as needed
+        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex] + " for " + damage + " damage!";
 
         yield return new WaitForSeconds(1f);
 
-        bool isDead = playerUnits[currentPlayerIndex].TakeDamage(enemyUnit.damage);
+        bool isDead = playerUnits[currentPlayerIndex].TakeDamage(damage);
         playerHUDs[currentPlayerIndex].SetHP(playerUnits[currentPlayerIndex].currentHP);
 
         yield return new WaitForSeconds(1f);
@@ -101,7 +103,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length;
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
@@ -109,13 +111,29 @@ public class BattleSystem : MonoBehaviour
 
     void EndBattle()
     {
-        if (state == BattleState.WON)
+        bool allPlayersDefeated = true;
+
+        // Check if all players are defeated
+        foreach (Unit playerUnit in playerUnits)
         {
-            dialogueText.text = "You won the battle!";
+            if (playerUnit.currentHP > 0)
+            {
+                allPlayersDefeated = false;
+                break;
+            }
         }
-        else if (state == BattleState.LOST)
+
+        if (allPlayersDefeated)
         {
+            state = BattleState.LOST;
             dialogueText.text = "You were defeated.";
+            return;
+        }
+
+        if (enemyUnit.currentHP <= 0)
+        {
+            state = BattleState.WON;
+            dialogueText.text = "You won the battle!";
         }
     }
 
