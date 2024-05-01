@@ -25,6 +25,9 @@ public class ShowMap : MonoBehaviour
     }
 
     void ToggleMiniMap()
+
+
+
     {
         bool isActive = mapImage.gameObject.activeSelf;
         SetMiniMapActive(!isActive);
