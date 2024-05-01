@@ -23,29 +23,22 @@ public class WireManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pictures[0].rotation.z == 0 &&
-            pictures[1].rotation.z == 0 &&
-            pictures[2].rotation.z == 0 &&
-            pictures[3].rotation.z == 0 &&
-            pictures[4].rotation.z == 0 &&
-            pictures[5].rotation.z == 0 &&
-            pictures[6].rotation.z == 0 &&
-            pictures[7].rotation.z == 0 &&
-            pictures[8].rotation.z == 0 &&
-            pictures[9].rotation.z == 0 &&
-            pictures[10].rotation.z == 0 &&
-            pictures[11].rotation.z == 0 &&
-            pictures[12].rotation.z == 0 &&
-            pictures[13].rotation.z == 0 &&
-            pictures[14].rotation.z == 0 &&
-            pictures[15].rotation.z == 0 &&
-            pictures[16].rotation.z == 0 &&
-            pictures[17].rotation.z == 0 &&
-            pictures[18].rotation.z == 0 &&
-            pictures[19].rotation.z == 0)
+        if (
+            pictures[2].rotation.z == 90 &&
+            pictures[3].rotation.z == 90 &&
+            pictures[4].rotation.z == 90 &&
+            pictures[5].rotation.z == 90 &&
+            pictures[6].rotation.z == 90 &&
+            pictures[7].rotation.z == 90 &&
+            pictures[8].rotation.z == 90 &&
+            pictures[12].rotation.z == 90 &&
+            pictures[13].rotation.z == 90 &&
+            pictures[16].rotation.z == 90 &&
+            pictures[17].rotation.z == 90)
         {
             Won = true;
             winUI.SetActive(true);
+            Debug.Log("you won!");
         }
 
     }
