@@ -1,72 +1,78 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 public class UnlockManifolds : MonoBehaviour
 {
-    public List<Sprite> images; // List of images to be displayed
-    public List<int> correctOrder; // Correct order of images
-    public List<Image> imageSlots; // Image slots where images will be displayed
-    public GameObject correctImagePrefab; // Prefab of the correct image to display
-
-    private List<int> currentOrder; // Current order of displayed images
-    private int currentIndex = 0; // Index to track the player's progress
+    public Sprite[] correctSprites; // Array of sprites for correct buttons
+    public Button[] buttons; // Array of buttons
+    private Sprite[] originalSprites; // Array to store original sprites of buttons
+    private List<Vector3> originalPositions = new List<Vector3>(); // List to store original positions of buttons
+    public int currentIndex = 0; // Index of the current expected button
 
     void Start()
     {
-        // Randomize the initial order of images
-        currentOrder = new List<int>();
-        for (int i = 0; i < imageSlots.Count; i++)
+        // Store original sprites and positions of buttons
+        originalSprites = new Sprite[buttons.Length];
+        for (int i = 0; i < buttons.Length; i++)
         {
-            int randomIndex = Random.Range(0, images.Count);
-            currentOrder.Add(randomIndex);
-            imageSlots[i].sprite = images[randomIndex];
+            originalSprites[i] = buttons[i].image.sprite;
+            originalPositions.Add(buttons[i].transform.position);
+            int buttonIndex = i; // Ensure each button has its own index
+            buttons[i].onClick.AddListener(() => OnButtonClick(buttonIndex));
+        }
+
+        // Randomize button positions
+        RandomizeButtonPositions();
+    }
+
+    void RandomizeButtonPositions()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            int randomIndex = Random.Range(i, buttons.Length);
+            // Swap positions
+            Vector3 temp = buttons[i].transform.position;
+            buttons[i].transform.position = buttons[randomIndex].transform.position;
+            buttons[randomIndex].transform.position = temp;
         }
     }
 
-    // Function to check if the current order matches the correct order
-    void CheckOrder()
+    void OnButtonClick(int buttonIndex)
     {
-        for (int i = 0; i < correctOrder.Count; i++)
+        // Check if the button pressed is the expected button
+        if (buttonIndex == currentIndex)
         {
-            if (currentOrder[i] != correctOrder[i])
+            // Change button sprite
+            buttons[buttonIndex].image.sprite = correctSprites[buttonIndex];
+            currentIndex++; // Move to the next expected button
+
+            // Check if all buttons have been pressed
+            if (currentIndex >= buttons.Length)
             {
-                return; // Current order does not match correct order
-            }
-        }
-        // Current order matches correct order
-        DisplayCorrectImage();
-    }
-
-    // Function to display the correct image
-    void DisplayCorrectImage()
-    {
-        foreach (Image slot in imageSlots)
-        {
-            slot.enabled = false; // Hide the current images
-        }
-
-        Instantiate(correctImagePrefab, transform.position, Quaternion.identity); // Instantiate the correct image
-    }
-
-    // Function to handle player input
-    public void OnImageClick(int index)
-    {
-        if (index == correctOrder[currentIndex])
-        {
-            // Player selected the correct image
-            currentIndex++;
-            if (currentIndex == correctOrder.Count)
-            {
-                CheckOrder(); // Check if the current order matches the correct order
+                Debug.Log("Congratulations! You completed the game.");
+                // Game completed, you can add further logic here
             }
         }
         else
         {
-            // Player selected the wrong image, reset the sequence
-            currentIndex = 0;
+            // Incorrect button pressed, reset the game
+            Debug.Log("Incorrect button pressed. Restarting game.");
+            ResetGame();
         }
     }
-}
 
+    void ResetGame()
+    {
+        // Reset button sprites and positions to original values
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].image.sprite = originalSprites[i];
+            buttons[i].transform.position = originalPositions[i];
+        }
+        currentIndex = 0; // Reset current index
+
+        // Randomize button positions again
+        RandomizeButtonPositions();
+    }
+}

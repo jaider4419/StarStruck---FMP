@@ -22,6 +22,9 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD[] playerHUDs; // Array of player HUDs
     public BattleHUD enemyHUD;
 
+    public Button[] attackButtons; // Array of attack buttons
+    public Button[] healButtons; // Array of heal buttons
+
     public BattleState state;
 
     private int currentPlayerIndex = 0; // Index of the current player
@@ -29,12 +32,15 @@ public class BattleSystem : MonoBehaviour
     // Names of players
     public string[] playerNames;
 
+    // Damage range for random attacks
+    public int minDamage = 5;
+    public int maxDamage = 10;
+
     // Start is called before the first frame update
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
-        Cursor.lockState = CursorLockMode.None;
     }
 
     IEnumerator SetupBattle()
@@ -52,15 +58,7 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-
-        enemyHUD.SetHUD(enemyUnit);
-
-        dialogueText.text = enemyUnit.unitName + " wants you to pay for your crimes!";
-
-        yield return new WaitForSeconds(3);
-
-        dialogueText.text = "now you must attack him.";
-
+        dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
 
         enemyHUD.SetHUD(enemyUnit);
 
@@ -72,11 +70,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack(int playerIndex)
     {
-        int damage = playerUnits[playerIndex].GetRandomDamage(5, 10); // Adjust the damage range as needed
+        int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
         bool isDead = enemyUnit.TakeDamage(damage);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogueText.text = playerNames[playerIndex] + "'s attack deals " + damage + " damage!";
+        dialogueText.text = playerNames[playerIndex] + " attacks for " + damage + " damage!";
 
         yield return new WaitForSeconds(2f);
 
@@ -94,11 +92,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        int damage = enemyUnit.GetRandomDamage(8, 12); // Adjust the damage range as needed
-        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex];
+        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex] + "!";
 
         yield return new WaitForSeconds(1f);
 
+        int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
         bool isDead = playerUnits[currentPlayerIndex].TakeDamage(damage);
         playerHUDs[currentPlayerIndex].SetHP(playerUnits[currentPlayerIndex].currentHP);
 
@@ -111,7 +109,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length;
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
@@ -119,35 +117,37 @@ public class BattleSystem : MonoBehaviour
 
     void EndBattle()
     {
-        bool allPlayersDefeated = true;
-
-        // Check if all players are defeated
-        foreach (Unit playerUnit in playerUnits)
+        if (state == BattleState.WON)
         {
-            if (playerUnit.currentHP > 0)
-            {
-                allPlayersDefeated = false;
-                break;
-            }
-        }
-
-        if (allPlayersDefeated)
-        {
-            state = BattleState.LOST;
-            dialogueText.text = "You were defeated.";
-            return;
-        }
-
-        if (enemyUnit.currentHP <= 0)
-        {
-            state = BattleState.WON;
             dialogueText.text = "You won the battle!";
+        }
+        else if (state == BattleState.LOST)
+        {
+            dialogueText.text = "You were defeated.";
         }
     }
 
     void PlayerTurn()
     {
         dialogueText.text = playerNames[currentPlayerIndex] + ", choose an action:";
+        ActivateButtons(); // Activate buttons for the current player
+    }
+
+    void ActivateButtons()
+    {
+        // Enable attack and heal buttons for the current player
+        attackButtons[currentPlayerIndex].interactable = true;
+        healButtons[currentPlayerIndex].interactable = true;
+    }
+
+    void DeactivateButtons()
+    {
+        // Disable all attack and heal buttons
+        foreach (Button button in attackButtons)
+            button.interactable = false;
+
+        foreach (Button button in healButtons)
+            button.interactable = false;
     }
 
     IEnumerator PlayerHeal(int playerIndex)
@@ -155,7 +155,7 @@ public class BattleSystem : MonoBehaviour
         playerUnits[playerIndex].Heal(5);
 
         playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
-        dialogueText.text = playerNames[playerIndex] + " has regained some energy!";
+        dialogueText.text = playerNames[playerIndex] + " feels renewed strength!";
 
         yield return new WaitForSeconds(2f);
 
@@ -169,6 +169,7 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYERTURN || playerIndex != currentPlayerIndex)
             return;
 
+        DeactivateButtons(); // Deactivate buttons after pressing
         StartCoroutine(PlayerAttack(playerIndex));
     }
 
@@ -177,7 +178,7 @@ public class BattleSystem : MonoBehaviour
         if (state != BattleState.PLAYERTURN || playerIndex != currentPlayerIndex)
             return;
 
+        DeactivateButtons(); // Deactivate buttons after pressing
         StartCoroutine(PlayerHeal(playerIndex));
     }
-
 }
