@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UnlockManifolds.unity
     guid: dc5407d1c4c6ba244ba4f811af55eb35
   - enabled: 1
-    path: Assets/LoadingIn.unity
+    path: Assets/Scenes/First.unity
     guid: f6fcd85b1a86e8b44a983c0ae1d7a829
   - enabled: 1
     path: Assets/Scenes/Skyscraper.unity
