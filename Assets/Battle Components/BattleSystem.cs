@@ -87,7 +87,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         int damage = enemyUnit.GetRandomDamage(8, 12); // Adjust the damage range as needed
-        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex] + " for " + damage + " damage!";
+        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex];
 
         yield return new WaitForSeconds(1f);
 
