@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UnlockManifolds : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class UnlockManifolds : MonoBehaviour
     private Sprite[] originalSprites; // Array to store original sprites of buttons
     private List<Vector3> originalPositions = new List<Vector3>(); // List to store original positions of buttons
     public int currentIndex = 0; // Index of the current expected button
+    public GameObject Winner;
+    public AudioSource WinSound;
+    public AudioSource Wrong;
 
     void Start()
     {
+        Winner.SetActive(false);
         // Store original sprites and positions of buttons
         originalSprites = new Sprite[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
@@ -50,8 +55,10 @@ public class UnlockManifolds : MonoBehaviour
             // Check if all buttons have been pressed
             if (currentIndex >= buttons.Length)
             {
-                Debug.Log("Congratulations! You completed the game.");
-                // Game completed, you can add further logic here
+                Winner.SetActive(true);
+                Invoke("ReturnToGame", 2f);
+                WinSound.Play();
+
             }
         }
         else
@@ -71,8 +78,14 @@ public class UnlockManifolds : MonoBehaviour
             buttons[i].transform.position = originalPositions[i];
         }
         currentIndex = 0; // Reset current index
-
+        Wrong.Play();
         // Randomize button positions again
         RandomizeButtonPositions();
+
+    }
+
+    void ReturnToGame()
+    {
+        SceneManager.LoadScene("First");
     }
 }

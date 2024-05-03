@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject correctui;
     public GameObject WinText;
+    public AudioSource win;
 
     // Start is called before the first frame update
     void Start()
@@ -40,14 +42,22 @@ public class GameManager : MonoBehaviour
         if (correctedPipes == totalPipes)
         {
             Debug.Log("You win!");
+            win.Play();
             WinText.SetActive(true);
             correctui.SetActive(true);
 
+            Invoke("ReturnToGame", 2f);
         }
+
     }
 
     public void wrongMove()
     {
         correctedPipes -= 1;
+    }
+
+    void ReturnToGame()
+    {
+        SceneManager.LoadScene("First");
     }
 }
