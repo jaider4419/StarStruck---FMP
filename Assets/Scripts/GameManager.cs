@@ -13,11 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     int correctedPipes = 0;
 
+    public GameObject correctui;
     public GameObject WinText;
 
     // Start is called before the first frame update
     void Start()
     {
+        correctui.SetActive(false);
         WinText.SetActive(false);
         totalPipes = PipesHolder.transform.childCount;
 
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("You win!");
             WinText.SetActive(true);
+            correctui.SetActive(true);
+
         }
     }
 
