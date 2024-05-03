@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LightBulbBoss.unity
     guid: 1bab68825c67634438abc8437a05853f
+  - enabled: 1
+    path: Assets/Scenes/WireTask.unity
+    guid: 01e458b9d24ff814584b05a22e917dec
   m_configObjects: {}

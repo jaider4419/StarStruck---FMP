@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         correctui.SetActive(false);
         WinText.SetActive(false);
         totalPipes = PipesHolder.transform.childCount;
