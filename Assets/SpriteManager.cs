@@ -6,22 +6,12 @@ public class SpriteManager : MonoBehaviour
 
     public Sprite[] correctSequence; // Array to define the correct sequence of sprites for winning the game
 
-    public Sprite spriteDown; // Sprite for the down position
-    public Sprite spriteUp; // Sprite for the up position
 
     private bool hasWon = false; // Flag to track whether the win condition has been triggered
 
     void Start()
     {
-        // Randomly assign the initial sprite positions
-        for (int i = 0; i < switchRenderers.Length; i++)
-        {
-            // Generate a random number to determine the initial position
-            bool isUp = Random.Range(0, 2) == 0; // 50% chance of being true or false
 
-            // Set the sprite based on the random position
-            switchRenderers[i].sprite = isUp ? spriteUp : spriteDown;
-        }
     }
 
     void Update()
@@ -30,6 +20,7 @@ public class SpriteManager : MonoBehaviour
         if (!hasWon && CheckWinCondition())
         {
             Debug.Log("You win!");
+
             hasWon = true; // Set the flag to indicate that the win condition has been triggered
         }
     }
