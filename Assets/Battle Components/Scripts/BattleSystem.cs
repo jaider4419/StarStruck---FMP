@@ -22,7 +22,10 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD[] playerHUDs; // Array of player HUDs
     public BattleHUD enemyHUD;
 
-    public Button[] attackButtons; // Array of attack buttons
+    public Button[] player1AttackButtons; // Attack buttons for Player 1
+    public Button[] player2AttackButtons; // Attack buttons for Player 2
+    public Button[] player3AttackButtons; // Attack buttons for Player 3
+
     public Button[] healButtons; // Array of heal buttons
 
     public BattleState state;
@@ -68,9 +71,42 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();
     }
 
-    IEnumerator PlayerAttack(int playerIndex)
+    void PlayerTurn()
     {
-        int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
+        // Enable attack and heal buttons for the current player
+        switch (currentPlayerIndex)
+        {
+            case 0:
+                EnableButtons(player1AttackButtons);
+                break;
+            case 1:
+                EnableButtons(player2AttackButtons);
+                break;
+            case 2:
+                EnableButtons(player3AttackButtons);
+                break;
+        }
+
+        dialogueText.text = playerNames[currentPlayerIndex] + ", choose an action:";
+    }
+
+    void EnableButtons(Button[] buttons)
+    {
+        foreach (Button button in buttons)
+        {
+            button.interactable = true; // Enable buttons
+        }
+        foreach (Button button in healButtons)
+        {
+            button.interactable = true; // Enable heal buttons
+        }
+    }
+
+    IEnumerator PlayerAttack(int playerIndex, int damage)
+    {
+        // Disable attack and heal buttons during the player's turn
+        DisableAllButtons();
+
         bool isDead = enemyUnit.TakeDamage(damage);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
@@ -88,6 +124,29 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
+
+        // Enable attack and heal buttons after player's action is completed
+        EnableAllButtons();
+    }
+
+    IEnumerator PlayerHeal(int playerIndex)
+    {
+        // Disable attack and heal buttons during the player's turn
+        DisableAllButtons();
+
+        playerUnits[playerIndex].Heal(5);
+
+        playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
+        dialogueText.text = playerNames[playerIndex] + " feels renewed strength!";
+
+        yield return new WaitForSeconds(2f);
+
+        currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+
+        // Enable attack and heal buttons after player's action is completed
+        EnableAllButtons();
     }
 
     IEnumerator EnemyTurn()
@@ -103,6 +162,26 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         if (isDead)
+        {
+            // Mark the defeated player as inactive
+            playerUnits[currentPlayerIndex].gameObject.SetActive(false);
+
+            // Announce the defeated player
+            dialogueText.text = playerNames[currentPlayerIndex] + " has been defeated!";
+        }
+
+        // Check if all players are defeated
+        bool allPlayersDefeated = true;
+        foreach (Unit playerUnit in playerUnits)
+        {
+            if (playerUnit.isActiveAndEnabled)
+            {
+                allPlayersDefeated = false;
+                break;
+            }
+        }
+
+        if (allPlayersDefeated)
         {
             state = BattleState.LOST;
             EndBattle();
@@ -127,58 +206,90 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void PlayerTurn()
+    void DisableAllButtons()
     {
-        dialogueText.text = playerNames[currentPlayerIndex] + ", choose an action:";
-        ActivateButtons(); // Activate buttons for the current player
+        // Disable all attack and heal buttons during player's action
+        foreach (Button[] buttons in new Button[][] { player1AttackButtons, player2AttackButtons, player3AttackButtons, healButtons })
+        {
+            foreach (Button button in buttons)
+            {
+                button.interactable = false;
+            }
+        }
     }
 
-    void ActivateButtons()
+    void EnableAllButtons()
     {
-        // Enable attack and heal buttons for the current player
-        attackButtons[currentPlayerIndex].interactable = true;
-        healButtons[currentPlayerIndex].interactable = true;
+        // Enable all attack and heal buttons after player's action
+        foreach (Button[] buttons in new Button[][] { player1AttackButtons, player2AttackButtons, player3AttackButtons, healButtons })
+        {
+            foreach (Button button in buttons)
+            {
+                button.interactable = true;
+            }
+        }
     }
 
-    void DeactivateButtons()
+    // Button click events for player attacks
+    public void OnPlayer1AttackButton1()
     {
-        // Disable all attack and heal buttons
-        foreach (Button button in attackButtons)
-            button.interactable = false;
-
-        foreach (Button button in healButtons)
-            button.interactable = false;
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
+            StartCoroutine(PlayerAttack(0, 10)); // Player 1, Attack 1
     }
 
-    IEnumerator PlayerHeal(int playerIndex)
+    public void OnPlayer1AttackButton2()
     {
-        playerUnits[playerIndex].Heal(5);
-
-        playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
-        dialogueText.text = playerNames[playerIndex] + " feels renewed strength!";
-
-        yield return new WaitForSeconds(2f);
-
-        currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
-        state = BattleState.ENEMYTURN;
-        StartCoroutine(EnemyTurn());
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
+            StartCoroutine(PlayerAttack(0, 15)); // Player 1, Attack 2
     }
 
-    public void OnAttackButton(int playerIndex)
+    public void OnPlayer1AttackButton3()
     {
-        if (state != BattleState.PLAYERTURN || playerIndex != currentPlayerIndex)
-            return;
-
-        DeactivateButtons(); // Deactivate buttons after pressing
-        StartCoroutine(PlayerAttack(playerIndex));
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
+            StartCoroutine(PlayerAttack(0, 20)); // Player 1, Attack 3
     }
 
+    // Similar methods for Player 2 and Player 3 attacks
+    public void OnPlayer2AttackButton1()
+    {
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
+            StartCoroutine(PlayerAttack(1, 10)); // Player 2, Attack 1
+    }
+
+    public void OnPlayer2AttackButton2()
+    {
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
+            StartCoroutine(PlayerAttack(1, 15)); // Player 2, Attack 2
+    }
+
+    public void OnPlayer2AttackButton3()
+    {
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
+            StartCoroutine(PlayerAttack(1, 20)); // Player 2, Attack 3
+    }
+
+    public void OnPlayer3AttackButton1()
+    {
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
+            StartCoroutine(PlayerAttack(2, 10)); // Player 3, Attack 1
+    }
+
+    public void OnPlayer3AttackButton2()
+    {
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
+            StartCoroutine(PlayerAttack(2, 15)); // Player 3, Attack 2
+    }
+
+    public void OnPlayer3AttackButton3()
+    {
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
+            StartCoroutine(PlayerAttack(2, 20)); // Player 3, Attack 3
+    }
+
+    // Button click event for heal
     public void OnHealButton(int playerIndex)
     {
-        if (state != BattleState.PLAYERTURN || playerIndex != currentPlayerIndex)
-            return;
-
-        DeactivateButtons(); // Deactivate buttons after pressing
-        StartCoroutine(PlayerHeal(playerIndex));
+        if (state == BattleState.PLAYERTURN && currentPlayerIndex == playerIndex)
+            StartCoroutine(PlayerHeal(playerIndex));
     }
 }
