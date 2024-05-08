@@ -8,6 +8,7 @@ public class SpriteToggleNormal : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private bool isSprite1 = true; // Current state of the sprite
+    public AudioSource switchNoise;
 
     private void Start()
     {
@@ -22,10 +23,12 @@ public class SpriteToggleNormal : MonoBehaviour
         if (isSprite1)
         {
             spriteRenderer.sprite = sprite2;
+            switchNoise.Play();
         }
         else
         {
             spriteRenderer.sprite = sprite1;
+            switchNoise.Play();
         }
         // Update the state
         isSprite1 = !isSprite1;

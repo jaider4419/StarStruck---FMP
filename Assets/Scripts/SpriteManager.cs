@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpriteManager : MonoBehaviour
 {
@@ -6,12 +7,16 @@ public class SpriteManager : MonoBehaviour
 
     public Sprite[] correctSequence; // Array to define the correct sequence of sprites for winning the game
 
+    public GameObject winui;
 
     private bool hasWon = false; // Flag to track whether the win condition has been triggered
 
+    public AudioSource winSound;
+    public string sceneName;
+
     void Start()
     {
-
+        winui.SetActive(false);
     }
 
     void Update()
@@ -19,7 +24,10 @@ public class SpriteManager : MonoBehaviour
         // Check if the win condition is met and the message hasn't been logged yet
         if (!hasWon && CheckWinCondition())
         {
+            winui.SetActive(true);
             Debug.Log("You win!");
+            winSound.Play();
+            Invoke("ReturnToScene", 2f);
 
             hasWon = true; // Set the flag to indicate that the win condition has been triggered
         }
@@ -38,5 +46,10 @@ public class SpriteManager : MonoBehaviour
         }
         // If all switches are in the correct state, return true
         return true;
+    }
+
+    public void ReturnToScene()
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
