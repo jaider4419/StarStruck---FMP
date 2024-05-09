@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -181,8 +181,7 @@ MonoBehaviour:
   player1ReplenishButton: {fileID: 2119350754}
   player2ReplenishButton: {fileID: 159550256}
   player3ReplenishButton: {fileID: 945560986}
-  healButtons:
-  - {fileID: 371877329}
+  healButtons: []
   state: 0
   playerNames:
   - Cody
@@ -550,7 +549,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1059,8 +1058,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7392946}
         m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
-        m_MethodName: OnReplenishButton
-        m_Mode: 3
+        m_MethodName: OnPlayer2ReplenishButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2328,7 +2327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -56}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &446444830
@@ -5529,8 +5528,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7392946}
         m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
-        m_MethodName: OnReplenishButton
-        m_Mode: 3
+        m_MethodName: OnPlayer3ReplenishButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12343,8 +12342,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7392946}
         m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
-        m_MethodName: OnReplenishButton
-        m_Mode: 3
+        m_MethodName: OnPlayer1ReplenishButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

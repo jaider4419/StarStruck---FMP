@@ -10,7 +10,7 @@ public class Chest : MonoBehaviour, IInteractable
     public string sceneName;
 
     public string InteractionPrompt => prompt;
-
+    
     public bool Interact(Interactor interactor)
     {
         Debug.Log("Opening chest!");

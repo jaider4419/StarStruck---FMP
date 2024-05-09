@@ -32,10 +32,10 @@ public class Unit : MonoBehaviour
     {
         currentEnergy -= nrg;
 
-        if (currentEnergy <= 0) 
+        if (currentEnergy <= 0)
             return true;
         else
-            return false;  
+            return false;
     }
 
     public void Heal(int amount)
@@ -47,8 +47,8 @@ public class Unit : MonoBehaviour
 
     public void Replenish(int amount)
     {
-        currentHP += amount;
-        if (currentEnergy < maxEnergy)
+        currentEnergy += amount;
+        if (currentEnergy > maxEnergy)
             currentEnergy = maxEnergy;
     }
 
@@ -59,7 +59,17 @@ public class Unit : MonoBehaviour
 
     public int GetRandomFatigue(int minFatigue, int maxFatigue)
     {
-       return Random.Range(minFatigue, maxFatigue + 1);
+        return Random.Range(minFatigue, maxFatigue + 1);
+    }
+
+    public void DecreaseEnergy(int amount)
+    {
+        currentEnergy -= amount;
+
+        if (currentEnergy < 0)
+        {
+            currentEnergy = 0;
+        }
     }
 
 }
