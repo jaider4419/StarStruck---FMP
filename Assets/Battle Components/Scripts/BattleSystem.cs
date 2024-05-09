@@ -61,7 +61,7 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+        dialogueText.text = enemyUnit.unitName + " want you to pay for your crimes!";
 
         enemyHUD.SetHUD(enemyUnit);
 
@@ -134,7 +134,7 @@ public class BattleSystem : MonoBehaviour
         // Disable attack and heal buttons during the player's turn
         DisableAllButtons();
 
-        playerUnits[playerIndex].Heal(5);
+        playerUnits[playerIndex].Heal(10);
 
         playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
         dialogueText.text = playerNames[playerIndex] + " feels renewed strength!";
@@ -231,7 +231,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Button click events for player attacks
-    public void OnPlayer1AttackButton1()
+    public void OnPlayer1AttackButton1() // CODY
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
             StartCoroutine(PlayerAttack(0, 10)); // Player 1, Attack 1
@@ -250,7 +250,7 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Similar methods for Player 2 and Player 3 attacks
-    public void OnPlayer2AttackButton1()
+    public void OnPlayer2AttackButton1() // MALLOW
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
             StartCoroutine(PlayerAttack(1, 10)); // Player 2, Attack 1
@@ -268,7 +268,7 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(PlayerAttack(1, 20)); // Player 2, Attack 3
     }
 
-    public void OnPlayer3AttackButton1()
+    public void OnPlayer3AttackButton1() // EMORY
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
             StartCoroutine(PlayerAttack(2, 10)); // Player 3, Attack 1

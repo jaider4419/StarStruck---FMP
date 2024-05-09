@@ -5393,7 +5393,7 @@ RectTransform:
   m_GameObject: {fileID: 1413034099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8146112, y: 1.8146112, z: 1.8146112}
+  m_LocalScale: {x: 1.2679442, y: 1.2679442, z: 1.2679442}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 177335930}
@@ -5401,7 +5401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 769, y: -496}
+  m_AnchoredPosition: {x: 568, y: -511}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413034101
@@ -5424,12 +5424,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mission completed!
+  m_text: 'MISSION COMPLETED!
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9d58a831b6e324945826a8c6ce4839d6, type: 2}
-  m_sharedMaterial: {fileID: 8183286729171423337, guid: 9d58a831b6e324945826a8c6ce4839d6,
+  m_fontAsset: {fileID: 11400000, guid: 31dd7af530c033a4199b206822b915f9, type: 2}
+  m_sharedMaterial: {fileID: 895744944447290786, guid: 31dd7af530c033a4199b206822b915f9,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5490,7 +5490,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -224.92484, y: 0, z: 0, w: 12.103047}
+  m_margin: {x: -212.54489, y: 0, z: -212.15634, w: 12.103047}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
