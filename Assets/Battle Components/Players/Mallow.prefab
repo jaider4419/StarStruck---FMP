@@ -49,3 +49,5 @@ MonoBehaviour:
   damage: 5
   maxHP: 30
   currentHP: 30
+  maxEnergy: 30
+  currentEnergy: 30

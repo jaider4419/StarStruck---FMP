@@ -11,7 +11,6 @@ public class SimonSaysGame : MonoBehaviour
 
     private List<int> sequence = new List<int>(); // Sequence of indexes for stars
     private List<int> playerSequence = new List<int>(); // Player's input sequence
-    private int currentIndex = 0; // Index to keep track of the current step in the sequence
     private bool isDisplayingSequence = false; // Flag to indicate whether the sequence is being displayed
 
     private GameObject[] greyStars; // Array to store grey star objects
