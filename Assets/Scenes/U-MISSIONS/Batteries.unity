@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 26010372}
   - component: {fileID: 26010371}
   m_Layer: 0
-  m_Name: battery_orange (2)
+  m_Name: blue battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 46219016}
   - component: {fileID: 46219015}
   m_Layer: 0
-  m_Name: battery_orange (3)
+  m_Name: red battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 182858213}
   - component: {fileID: 182858212}
   m_Layer: 0
-  m_Name: battery_orange (4)
+  m_Name: orange battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ GameObject:
   - component: {fileID: 216272449}
   - component: {fileID: 216272448}
   m_Layer: 0
-  m_Name: battery_orange
+  m_Name: purple batter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1116,7 +1116,7 @@ GameObject:
   - component: {fileID: 934696965}
   - component: {fileID: 934696964}
   m_Layer: 0
-  m_Name: battery_orange (1)
+  m_Name: green battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

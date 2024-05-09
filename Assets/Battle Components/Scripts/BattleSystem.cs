@@ -26,6 +26,10 @@ public class BattleSystem : MonoBehaviour
     public Button[] player2AttackButtons; // Attack buttons for Player 2
     public Button[] player3AttackButtons; // Attack buttons for Player 3
 
+    public Button player1ReplenishButton;
+    public Button player2ReplenishButton;
+    public Button player3ReplenishButton;
+
     public Button[] healButtons; // Array of heal buttons
 
     public BattleState state;
@@ -38,6 +42,11 @@ public class BattleSystem : MonoBehaviour
     // Damage range for random attacks
     public int minDamage = 5;
     public int maxDamage = 10;
+
+    // Fatigue range for Energy taken when the boss attacks the player. (vice versa but the boss energy should be hidden)
+    public int minFatigue = 5;
+    public int maxFatigue = 10;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +70,7 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        dialogueText.text = "A wild " + enemyUnit.unitName + " approaches...";
+        dialogueText.text = enemyUnit.unitName + " want you to pay for your crimes!";
 
         enemyHUD.SetHUD(enemyUnit);
 
@@ -100,9 +109,10 @@ public class BattleSystem : MonoBehaviour
         {
             button.interactable = true; // Enable heal buttons
         }
+
     }
 
-    IEnumerator PlayerAttack(int playerIndex, int damage)
+    IEnumerator PlayerAttack(int playerIndex, int damage,  int fatigue)
     {
         // Disable attack and heal buttons during the player's turn
         DisableAllButtons();
@@ -125,6 +135,8 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(EnemyTurn());
         }
 
+
+
         // Enable attack and heal buttons after player's action is completed
         EnableAllButtons();
     }
@@ -134,7 +146,7 @@ public class BattleSystem : MonoBehaviour
         // Disable attack and heal buttons during the player's turn
         DisableAllButtons();
 
-        playerUnits[playerIndex].Heal(5);
+        playerUnits[playerIndex].Heal(10);
 
         playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
         dialogueText.text = playerNames[playerIndex] + " feels renewed strength!";
@@ -149,6 +161,25 @@ public class BattleSystem : MonoBehaviour
         EnableAllButtons();
     }
 
+    IEnumerator PlayerReplenish(int playerIndex)
+    {
+        DisableAllButtons();
+
+        playerUnits[playerIndex].Replenish(10);
+
+        playerHUDs[playerIndex].SetEnergy(playerUnits[playerIndex].currentHP);
+        dialogueText.text = playerNames[playerIndex] + " has gained some energy!";
+
+        yield return new WaitForSeconds(2f);
+
+        currentPlayerIndex = (currentPlayerIndex - 1) % playerUnits.Length;
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+
+        EnableAllButtons();
+
+    }
+
     IEnumerator EnemyTurn()
     {
         dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex] + "!";
@@ -156,8 +187,17 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
+        int fatigue = 10;
+
+
         bool isDead = playerUnits[currentPlayerIndex].TakeDamage(damage);
+        bool isSleeping = playerUnits[currentPlayerIndex].TakeFatigue(fatigue);
+
+
         playerHUDs[currentPlayerIndex].SetHP(playerUnits[currentPlayerIndex].currentHP);
+
+        playerHUDs[currentPlayerIndex].SetEnergy(playerUnits[currentPlayerIndex].currentEnergy);
+
 
         yield return new WaitForSeconds(1f);
 
@@ -168,6 +208,13 @@ public class BattleSystem : MonoBehaviour
 
             // Announce the defeated player
             dialogueText.text = playerNames[currentPlayerIndex] + " has been defeated!";
+        }
+
+        if (isSleeping)
+        {
+            playerUnits[currentPlayerIndex].gameObject.SetActive(false);
+
+            dialogueText.text = playerNames[currentPlayerIndex] + "is low on energy and sleeping!";
         }
 
         // Check if all players are defeated
@@ -231,65 +278,50 @@ public class BattleSystem : MonoBehaviour
     }
 
     // Button click events for player attacks
-    public void OnPlayer1AttackButton1()
+    public void OnPlayer1AttackButton1() // CODY
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
-            StartCoroutine(PlayerAttack(0, 10)); // Player 1, Attack 1
+            StartCoroutine(PlayerAttack(0, 10, 10)); // Player 1, Attack 1
     }
 
     public void OnPlayer1AttackButton2()
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
-            StartCoroutine(PlayerAttack(0, 15)); // Player 1, Attack 2
+            StartCoroutine(PlayerAttack(0, 15, 10)); // Player 1, Attack 2
     }
 
-    public void OnPlayer1AttackButton3()
-    {
-        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
-            StartCoroutine(PlayerAttack(0, 20)); // Player 1, Attack 3
-    }
 
-    // Similar methods for Player 2 and Player 3 attacks
-    public void OnPlayer2AttackButton1()
+    public void OnPlayer2AttackButton1() // MALLOW
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
-            StartCoroutine(PlayerAttack(1, 10)); // Player 2, Attack 1
+            StartCoroutine(PlayerAttack(1, 10, 10)); // Player 2, Attack 1
     }
 
     public void OnPlayer2AttackButton2()
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
-            StartCoroutine(PlayerAttack(1, 15)); // Player 2, Attack 2
+            StartCoroutine(PlayerAttack(1, 15, 10)); // Player 2, Attack 2
     }
 
-    public void OnPlayer2AttackButton3()
-    {
-        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
-            StartCoroutine(PlayerAttack(1, 20)); // Player 2, Attack 3
-    }
 
-    public void OnPlayer3AttackButton1()
+    public void OnPlayer3AttackButton1() // EMORY
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
-            StartCoroutine(PlayerAttack(2, 10)); // Player 3, Attack 1
+            StartCoroutine(PlayerAttack(2, 15, 10)); // Player 3, Attack 1
     }
 
-    public void OnPlayer3AttackButton2()
-    {
-        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
-            StartCoroutine(PlayerAttack(2, 15)); // Player 3, Attack 2
-    }
 
-    public void OnPlayer3AttackButton3()
-    {
-        if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
-            StartCoroutine(PlayerAttack(2, 20)); // Player 3, Attack 3
-    }
 
     // Button click event for heal
     public void OnHealButton(int playerIndex)
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == playerIndex)
             StartCoroutine(PlayerHeal(playerIndex));
+    }
+
+    public void OnReplenishButton(int playerIndex)
+    {
+        if(state == BattleState.PLAYERTURN && currentPlayerIndex == playerIndex)
+            StartCoroutine(PlayerReplenish(playerIndex));
     }
 }
