@@ -29,6 +29,8 @@ public class BattleSystem : MonoBehaviour
     public Button player2ReplenishButton;
     public Button player3ReplenishButton;
 
+    public AudioSource Testing;
+
     public Button[] healButtons; // Array of heal buttons
 
     public BattleState state;
@@ -64,9 +66,11 @@ public class BattleSystem : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        dialogueText.text = enemyUnit.unitName + " want you to pay for your crimes!";
 
         enemyHUD.SetHUD(enemyUnit);
+
+
+        dialogueText.text = enemyUnit.unitName + " wants you to pay for your crimes!";
 
         yield return new WaitForSeconds(2f);
 
@@ -168,6 +172,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
+
         currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
         state = BattleState.PLAYERTURN; // Set state to PLAYERTURN
         PlayerTurn(); // Start the next player's turn
@@ -241,7 +246,7 @@ public class BattleSystem : MonoBehaviour
         }
         else if (state == BattleState.LOST)
         {
-            dialogueText.text = "You were defeated.";
+            dialogueText.text = "You have lost the battle.";
         }
     }
 
