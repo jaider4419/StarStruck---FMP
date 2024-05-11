@@ -70,7 +70,7 @@ public class BattleSystem : MonoBehaviour
         enemyHUD.SetHUD(enemyUnit);
 
 
-        dialogueText.text = enemyUnit.unitName + " wants you to pay for your crimes!";
+        dialogueText.text = enemyUnit.unitName + " WANTS YOU TO PAY FOR YOUR CRIMES!";
 
         yield return new WaitForSeconds(2f);
 
@@ -94,7 +94,7 @@ public class BattleSystem : MonoBehaviour
                 break;
         }
 
-        dialogueText.text = playerNames[currentPlayerIndex] + ", choose an action:";
+        dialogueText.text = "WHAT WILL " + playerNames[currentPlayerIndex] + " DO?";
     }
 
     void EnableButtons(Button[] buttons)
@@ -121,7 +121,7 @@ public class BattleSystem : MonoBehaviour
         bool isDead = enemyUnit.TakeDamage(damage);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogueText.text = playerNames[playerIndex] + " attacks for " + damage + " damage!";
+        dialogueText.text = playerNames[playerIndex] + " ATTACKS " + enemyUnit.unitName;
 
         yield return new WaitForSeconds(2f);
 
@@ -148,7 +148,7 @@ public class BattleSystem : MonoBehaviour
         playerUnits[playerIndex].Heal(10);
 
         playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
-        dialogueText.text = playerNames[playerIndex] + " feels renewed strength!";
+        dialogueText.text = playerNames[playerIndex] + " FEELS RENEWED STRENGTH!";
 
         yield return new WaitForSeconds(2f);
 
@@ -168,7 +168,7 @@ public class BattleSystem : MonoBehaviour
         playerUnits[playerIndex].Replenish(20); // Replenish with 20 energy
 
         playerHUDs[playerIndex].SetEnergy(playerUnits[playerIndex].currentEnergy);
-        dialogueText.text = playerNames[playerIndex] + " has replenished their energy!";
+        dialogueText.text = playerNames[playerIndex] + " HAS REPLENISHED THEIR ENERGY!";
 
         yield return new WaitForSeconds(2f);
 
@@ -187,7 +187,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        dialogueText.text = enemyUnit.unitName + " attacks " + playerNames[currentPlayerIndex] + "!";
+        dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[currentPlayerIndex] + "!";
 
         yield return new WaitForSeconds(1f);
 
@@ -205,13 +205,20 @@ public class BattleSystem : MonoBehaviour
             // Mark the defeated player as inactive
             playerUnits[currentPlayerIndex].gameObject.SetActive(false);
             // Announce the defeated player
-            dialogueText.text = playerNames[currentPlayerIndex] + " has no health!";
+
+            yield return new WaitForSeconds(2f);
+
+
+            dialogueText.text = playerNames[currentPlayerIndex] + " HAS NO HEALTH!";
         }
 
         if (isSleeping)
         {
             playerUnits[currentPlayerIndex].gameObject.SetActive(false);
-            dialogueText.text = playerNames[currentPlayerIndex] + " is low on energy and sleeping!";
+
+            yield return new WaitForSeconds(2f);
+
+            dialogueText.text = playerNames[currentPlayerIndex] + " IS LOW ON ENERGY AND IS SLEEPING!";
         }
 
         // Check if all players are defeated
@@ -242,11 +249,11 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
-            dialogueText.text = "You won the battle!";
+            dialogueText.text = "You WON THE BATTLE!";
         }
         else if (state == BattleState.LOST)
         {
-            dialogueText.text = "You have lost the battle.";
+            dialogueText.text = "YOU HAVE LOST THE BATTLE.";
         }
     }
 

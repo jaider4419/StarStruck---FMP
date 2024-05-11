@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6700267820548561095}
   - component: {fileID: 5789244540605178365}
   m_Layer: 0
-  m_Name: Lamp Boss
+  m_Name: LAMP BOSS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a46bbeea30e85d40b1f22d788364a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Lamp Boss
+  unitName: LAMP BOSS
   unitLevel: 0
   damage: 30
+  fatigue: 0
   maxHP: 105
   currentHP: 105
+  maxEnergy: 0
+  currentEnergy: 0
