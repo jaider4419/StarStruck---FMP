@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Battery
   - BatterySlot
+  - Slot
   layers:
   - Default
   - TransparentFX
