@@ -47,7 +47,8 @@ MonoBehaviour:
   unitName: Emory
   unitLevel: 2
   damage: 5
-  maxHP: 30
-  currentHP: 30
-  maxEnergy: 30
-  currentEnergy: 15
+  fatigue: 0
+  maxHP: 50
+  currentHP: 50
+  maxEnergy: 50
+  currentEnergy: 50

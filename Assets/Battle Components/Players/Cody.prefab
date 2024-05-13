@@ -47,7 +47,13 @@ MonoBehaviour:
   unitName: Cody
   unitLevel: 2
   damage: 5
-  maxHP: 30
-  currentHP: 30
-  maxEnergy: 30
-  currentEnergy: 30
+  fatigue: 0
+  maxHP: 50
+  currentHP: 50
+  maxEnergy: 50
+  currentEnergy: 50
+  emotionObject: {fileID: 0}
+  happySprite: {fileID: 0}
+  neutralSprite: {fileID: 0}
+  sadSprite: {fileID: 0}
+  friedSprite: {fileID: 0}

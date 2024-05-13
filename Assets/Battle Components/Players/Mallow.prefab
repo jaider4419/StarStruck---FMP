@@ -47,7 +47,8 @@ MonoBehaviour:
   unitName: Mallow
   unitLevel: 2
   damage: 5
-  maxHP: 30
+  fatigue: 0
+  maxHP: 50
   currentHP: 30
-  maxEnergy: 30
+  maxEnergy: 50
   currentEnergy: 30

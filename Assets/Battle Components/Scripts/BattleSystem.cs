@@ -43,6 +43,7 @@ public class BattleSystem : MonoBehaviour
     // Damage range for random attacks
     public int minDamage = 5;
     public int maxDamage = 10;
+    public Sprite neutralSprite; // Reference to the neutral emotion sprite
 
     // Start is called before the first frame update
     void Start()
@@ -63,8 +64,36 @@ public class BattleSystem : MonoBehaviour
             playerHUDs[i].SetHUD(playerUnits[i]);
         }
 
+        foreach (Unit playerUnit in playerUnits)
+        {
+            SetInitialEmotionSprite(playerUnit);
+        }
+
+        void SetEmotionSprite(Unit unit, Sprite sprite)
+        {
+            // Get the SpriteRenderer component from the emotion object
+            SpriteRenderer emotionRenderer = unit.emotionObject.GetComponent<SpriteRenderer>();
+
+            // Check if the SpriteRenderer component exists
+            if (emotionRenderer != null)
+            {
+                emotionRenderer.sprite = sprite; // Set the sprite
+            }
+            else
+            {
+                Debug.LogError("EmotionObject does not have a SpriteRenderer component!");
+            }
+        }
+
+
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
+
+        void SetInitialEmotionSprite(Unit unit)
+        {
+            // Assign the initial emotion sprite to the emotion object
+            SetEmotionSprite(unit, neutralSprite);
+        }
 
 
         enemyHUD.SetHUD(enemyUnit);
