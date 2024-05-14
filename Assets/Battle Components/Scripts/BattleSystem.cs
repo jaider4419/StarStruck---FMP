@@ -10,6 +10,9 @@ public class BattleSystem : MonoBehaviour
     public GameObject[] playerPrefabs; // Array of player prefabs
     public GameObject enemyPrefab;
 
+    public Animator anim;
+    public Animator PlayerBox;
+
     public Transform[] playerBattleStations; // Array of player battle stations
     public Transform enemyBattleStation;
 
@@ -26,9 +29,9 @@ public class BattleSystem : MonoBehaviour
     public Button[] player2AttackButtons; // Attack buttons for Player 2
     public Button[] player3AttackButtons; // Attack buttons for Player 3
 
-    public Button player1ReplenishButton;
-    public Button player2ReplenishButton;
-    public Button player3ReplenishButton;
+    public Button[] player1ReplenishButton;
+    public Button[] player2ReplenishButton;
+    public Button[] player3ReplenishButton;
 
     public AudioSource Testing;
 
@@ -50,7 +53,7 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         state = BattleState.START;
-        StartCoroutine(SetupBattle());
+        StartCoroutine(SetupBattle());  
     }
 
     IEnumerator SetupBattle()
@@ -91,6 +94,8 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        anim.Play("lambooos");
+
         // Enable attack and heal buttons for the current player
         switch (currentPlayerIndex)
         {
@@ -103,10 +108,13 @@ public class BattleSystem : MonoBehaviour
             case 2:
                 EnableButtons(player3AttackButtons);
                 break;
+
         }
 
         dialogueText.text = "WHAT WILL " + playerNames[currentPlayerIndex] + " DO?";
     }
+
+
 
     void EnableButtons(Button[] buttons)
     {
@@ -118,7 +126,6 @@ public class BattleSystem : MonoBehaviour
         {
             button.interactable = true; // Enable heal buttons
         }
-
     }
 
     IEnumerator PlayerAttack(int playerIndex, int damage, int energyCost)
@@ -199,7 +206,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[currentPlayerIndex] + "!";
-
+        anim.Play("Hurt");
         yield return new WaitForSeconds(1f);
 
         int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
@@ -213,23 +220,27 @@ public class BattleSystem : MonoBehaviour
 
         if (isDead)
         {
+
+            dialogueText.text = playerNames[currentPlayerIndex] + " HAS NO HEALTH!";
             // Mark the defeated player as inactive
             playerUnits[currentPlayerIndex].gameObject.SetActive(false);
             // Announce the defeated player
 
             yield return new WaitForSeconds(2f);
 
-
-            dialogueText.text = playerNames[currentPlayerIndex] + " HAS NO HEALTH!";
         }
 
         if (isSleeping)
         {
+
+            dialogueText.text = playerNames[currentPlayerIndex] + " IS LOW ON ENERGY AND IS SLEEPING!";
+
+
             playerUnits[currentPlayerIndex].gameObject.SetActive(false);
 
             yield return new WaitForSeconds(2f);
 
-            dialogueText.text = playerNames[currentPlayerIndex] + " IS LOW ON ENERGY AND IS SLEEPING!";
+            
         }
 
         // Check if all players are defeated
@@ -283,8 +294,9 @@ public class BattleSystem : MonoBehaviour
     void EnableAllButtons()
     {
         // Enable all attack and heal buttons after player's action
-        foreach (Button[] buttons in new Button[][] { player1AttackButtons, player2AttackButtons, player3AttackButtons, healButtons })
+        foreach (Button[] buttons in new Button[][] { player1AttackButtons, player2AttackButtons, player3AttackButtons, healButtons,  })
         {
+            
             foreach (Button button in buttons)
             {
                 button.interactable = true;
