@@ -49,6 +49,6 @@ MonoBehaviour:
   damage: 5
   fatigue: 0
   maxHP: 50
-  currentHP: 30
+  currentHP: 50
   maxEnergy: 50
-  currentEnergy: 30
+  currentEnergy: 50

@@ -17,6 +17,7 @@ public class BattleSystem : MonoBehaviour
     Unit enemyUnit;
 
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI enemyDialogue;
 
     public BattleHUD[] playerHUDs; // Array of player HUDs
     public BattleHUD enemyHUD;
@@ -64,44 +65,25 @@ public class BattleSystem : MonoBehaviour
             playerHUDs[i].SetHUD(playerUnits[i]);
         }
 
-        foreach (Unit playerUnit in playerUnits)
-        {
-            SetInitialEmotionSprite(playerUnit);
-        }
 
-        void SetEmotionSprite(Unit unit, Sprite sprite)
-        {
-            // Get the SpriteRenderer component from the emotion object
-            SpriteRenderer emotionRenderer = unit.emotionObject.GetComponent<SpriteRenderer>();
-
-            // Check if the SpriteRenderer component exists
-            if (emotionRenderer != null)
-            {
-                emotionRenderer.sprite = sprite; // Set the sprite
-            }
-            else
-            {
-                Debug.LogError("EmotionObject does not have a SpriteRenderer component!");
-            }
-        }
+        
 
 
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        void SetInitialEmotionSprite(Unit unit)
-        {
-            // Assign the initial emotion sprite to the emotion object
-            SetEmotionSprite(unit, neutralSprite);
-        }
+        
 
 
         enemyHUD.SetHUD(enemyUnit);
 
 
         dialogueText.text = enemyUnit.unitName + " WANTS YOU TO PAY FOR YOUR CRIMES!";
+        enemyDialogue.text = "COUNT YOUR DAYS!";
 
         yield return new WaitForSeconds(2f);
+
+        enemyDialogue.text = null;
 
         state = BattleState.PLAYERTURN;
         PlayerTurn();

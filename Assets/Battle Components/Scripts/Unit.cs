@@ -12,65 +12,8 @@ public class Unit : MonoBehaviour
     public int maxEnergy;
     public int currentEnergy;
 
-    public GameObject emotionObject; // Reference to the emotion UI GameObject
 
-    // Add sprites for different emotions
-    public Sprite happySprite;
-    public Sprite neutralSprite;
-    public Sprite sadSprite;
-    public Sprite friedSprite; // New sprite for when the unit is defeated
-
-    void Update()
-    {
-        // Update emotion UI based on energy level
-        UpdateEmotionUI();
-    }
-
-    // Method to update the emotion UI based on energy level
-    void UpdateEmotionUI()
-    {
-        // Check if the unit is defeated
-        if (currentHP <= 0)
-        {
-            SetEmotionSprite(friedSprite); // Set emotion to friedSprite when defeated
-            return;
-        }
-
-        // Calculate energy percentage
-        float energyPercentage = (float)currentEnergy / maxEnergy;
-
-        // Set emotion based on energy level
-        if (energyPercentage >= 0.5f)
-        {
-            SetEmotionSprite(happySprite);
-        }
-        else if (energyPercentage >= 0.25f)
-        {
-            SetEmotionSprite(neutralSprite);
-        }
-        else
-        {
-            SetEmotionSprite(sadSprite);
-        }
-    }
-
-    // Method to set the emotion sprite
-    void SetEmotionSprite(Sprite sprite)
-    {
-        // Get the Image component from the emotion object
-        Image emotionImage = emotionObject.GetComponent<Image>();
-
-        // Check if the Image component exists
-        if (emotionImage != null)
-        {
-            emotionImage.sprite = sprite; // Set the sprite
-        }
-        else
-        {
-            Debug.LogError("EmotionObject does not have an Image component!");
-        }
-    }
-
+  
     // Method to take damage
     public bool TakeDamage(int dmg)
     {

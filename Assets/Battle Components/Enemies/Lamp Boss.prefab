@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6700267820548561095}
   - component: {fileID: 5789244540605178365}
   m_Layer: 0
-  m_Name: LAMP BOSS
+  m_Name: Lamp Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,13 @@ MonoBehaviour:
   unitLevel: 0
   damage: 30
   fatigue: 0
-  maxHP: 105
-  currentHP: 105
+  maxHP: 75
+  currentHP: 75
   maxEnergy: 0
   currentEnergy: 0
+  emotionObject: {fileID: 6572470248980408775, guid: 256706f0bd34b6d43891ea852d012c96,
+    type: 3}
+  happySprite: {fileID: 0}
+  neutralSprite: {fileID: 0}
+  sadSprite: {fileID: 0}
+  friedSprite: {fileID: 0}
