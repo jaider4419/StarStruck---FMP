@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,6 +158,8 @@ MonoBehaviour:
   - {fileID: 783862881426346564, guid: 3f1846eef9c9b2c4980c8d9c1b1afb6d, type: 3}
   enemyPrefab: {fileID: 3121646250353682764, guid: 1cb5fd1f6a9363b4b8e5098aefff41ad,
     type: 3}
+  anim: {fileID: 0}
+  PlayerBox: {fileID: 0}
   playerBattleStations:
   - {fileID: 2111778287}
   - {fileID: 60215997}
@@ -179,9 +181,12 @@ MonoBehaviour:
   player3AttackButtons:
   - {fileID: 525721240}
   - {fileID: 1862677810}
-  player1ReplenishButton: {fileID: 1925120380}
-  player2ReplenishButton: {fileID: 1540189005}
-  player3ReplenishButton: {fileID: 462984529}
+  player1ReplenishButton:
+  - {fileID: 0}
+  player2ReplenishButton:
+  - {fileID: 0}
+  player3ReplenishButton:
+  - {fileID: 0}
   Testing: {fileID: 2037265713}
   healButtons:
   - {fileID: 1040792075}
@@ -4348,6 +4353,69 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1128363968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128363970}
+  - component: {fileID: 1128363969}
+  m_Layer: 0
+  m_Name: EmotionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1128363969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128363968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e428a3229612840a63e60add819868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters:
+  - energySlider: {fileID: 0}
+    emotionImage: {fileID: 0}
+    happySprite: {fileID: 0}
+    neutralSprite: {fileID: 0}
+    tiredSprite: {fileID: 0}
+    friedSprite: {fileID: 0}
+  - energySlider: {fileID: 0}
+    emotionImage: {fileID: 0}
+    happySprite: {fileID: 0}
+    neutralSprite: {fileID: 0}
+    tiredSprite: {fileID: 0}
+    friedSprite: {fileID: 0}
+  - energySlider: {fileID: 0}
+    emotionImage: {fileID: 0}
+    happySprite: {fileID: 0}
+    neutralSprite: {fileID: 0}
+    tiredSprite: {fileID: 0}
+    friedSprite: {fileID: 0}
+--- !u!4 &1128363970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128363968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.342815, y: 32.13878, z: 72.822655}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1156211992
 GameObject:
   m_ObjectHideFlags: 0
