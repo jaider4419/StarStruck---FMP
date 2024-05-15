@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1299,7 +1299,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 427dc85685614d24b93755d9094897e3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2327,12 +2327,22 @@ MonoBehaviour:
     neutralSprite: {fileID: 21300000, guid: 51ca99097e975a549be7c61a0e77d483, type: 3}
     tiredSprite: {fileID: 21300000, guid: 62f8701c44087a344b8c324011da063b, type: 3}
     friedSprite: {fileID: 21300000, guid: c8200b3a92dbeaa4db166261ac292bc3, type: 3}
+    portraitImage: {fileID: 1523810841}
+    happyPortrait: {fileID: 21300000, guid: 64aa32db2e658d34a8172eaa8fb1718c, type: 3}
+    neutralPortrait: {fileID: 21300000, guid: f8ed880d847471a448b9c5ec63b0acba, type: 3}
+    tiredPortrait: {fileID: 21300000, guid: 74e1594e1c73ca84da4af309f9ad54f5, type: 3}
+    friedPortrait: {fileID: 21300000, guid: d2b46d31b3151df469cde19ac4593885, type: 3}
   - energySlider: {fileID: 678039183}
     emotionImage: {fileID: 126268030}
     happySprite: {fileID: 21300000, guid: a48d733a4489fa343a003f6b7bf88f2d, type: 3}
     neutralSprite: {fileID: 21300000, guid: 51ca99097e975a549be7c61a0e77d483, type: 3}
     tiredSprite: {fileID: 21300000, guid: 62f8701c44087a344b8c324011da063b, type: 3}
     friedSprite: {fileID: 21300000, guid: c8200b3a92dbeaa4db166261ac292bc3, type: 3}
+    portraitImage: {fileID: 314532758}
+    happyPortrait: {fileID: 21300000, guid: 427dc85685614d24b93755d9094897e3, type: 3}
+    neutralPortrait: {fileID: 21300000, guid: 755f67cb726fe98498b7bdb5cc236d4f, type: 3}
+    tiredPortrait: {fileID: 21300000, guid: 42cb8288509217443bf9039a904898ba, type: 3}
+    friedPortrait: {fileID: 21300000, guid: 14f68327361d2db45b04bda9ade83e15, type: 3}
 --- !u!4 &595158630
 Transform:
   m_ObjectHideFlags: 0
@@ -2357,22 +2367,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 595158628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 438ed06ed1ba9cf4f96841a8de45ef59, type: 3}
+  m_Script: {fileID: 11500000, guid: 77bc46dcc6dab4b4a8bd1b09e98c462c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characters:
-  - energySlider: {fileID: 430547359}
-    portraitImage: {fileID: 1523810841}
-    happyPortrait: {fileID: 21300000, guid: 64aa32db2e658d34a8172eaa8fb1718c, type: 3}
-    neutralPortrait: {fileID: 21300000, guid: f8ed880d847471a448b9c5ec63b0acba, type: 3}
-    tiredPortrait: {fileID: 21300000, guid: 74e1594e1c73ca84da4af309f9ad54f5, type: 3}
-    friedPortrait: {fileID: 21300000, guid: d2b46d31b3151df469cde19ac4593885, type: 3}
-  - energySlider: {fileID: 678039183}
-    portraitImage: {fileID: 314532758}
-    happyPortrait: {fileID: 21300000, guid: 427dc85685614d24b93755d9094897e3, type: 3}
-    neutralPortrait: {fileID: 21300000, guid: 755f67cb726fe98498b7bdb5cc236d4f, type: 3}
-    tiredPortrait: {fileID: 21300000, guid: 42cb8288509217443bf9039a904898ba, type: 3}
-    friedPortrait: {fileID: 21300000, guid: 14f68327361d2db45b04bda9ade83e15, type: 3}
+  - energySlider: {fileID: 1446584074}
+    emotionImage: {fileID: 1714283539}
+    neutralSprite: {fileID: 21300000, guid: 51ca99097e975a549be7c61a0e77d483, type: 3}
+    tiredSprite: {fileID: 21300000, guid: 62f8701c44087a344b8c324011da063b, type: 3}
+    friedSprite: {fileID: 21300000, guid: c8200b3a92dbeaa4db166261ac292bc3, type: 3}
+    portraitImage: {fileID: 577044467}
+    neutralPortrait: {fileID: 21300000, guid: 18450b5b197c02144a6102ba5d9880dc, type: 3}
+    tiredPortrait: {fileID: 21300000, guid: 77990384c57bce747b6f865859ae7d8b, type: 3}
+    friedPortrait: {fileID: 21300000, guid: 54b54c31028cd3d4bbfd134d59249ab6, type: 3}
 --- !u!1 &604493264
 GameObject:
   m_ObjectHideFlags: 0
@@ -5699,7 +5706,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 64aa32db2e658d34a8172eaa8fb1718c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

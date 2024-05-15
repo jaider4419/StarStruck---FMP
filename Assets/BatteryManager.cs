@@ -15,15 +15,15 @@ public class BatteryManager : MonoBehaviour
 
     private bool CheckWinCondition()
     {
-        // Check if all slots are occupied and batteries are in correct slots
+        // Check if all slots are occupied
         foreach (ItemSlot slot in slots)
         {
-            if (!slot.IsSlotOccupied() || !slot.IsCorrectBatteryInSlot())
+            if (!slot.IsSlotOccupied())
             {
-                return false; // At least one slot is not occupied or has incorrect battery
+                return false; // At least one slot is not occupied
             }
         }
-        return true; // All slots are occupied and have correct batteries
+        return true; // All slots are occupied
     }
 
     private void ShowWinUI()

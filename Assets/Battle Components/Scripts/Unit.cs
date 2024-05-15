@@ -12,8 +12,9 @@ public class Unit : MonoBehaviour
     public int maxEnergy;
     public int currentEnergy;
 
+    public bool isSecondPhase = false;
 
-  
+
     // Method to take damage
     public bool TakeDamage(int dmg)
     {
@@ -74,4 +75,12 @@ public class Unit : MonoBehaviour
     {
         return Random.Range(minFatigue, maxFatigue + 1);
     }
+
+    public void Reset()
+    {
+        // Reset relevant properties or fields here
+        currentHP = maxHP;
+        currentEnergy = maxEnergy;
+    }
+
 }

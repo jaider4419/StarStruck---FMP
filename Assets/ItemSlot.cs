@@ -6,26 +6,26 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     private bool isOccupied = false;
     private DragDrop currentBattery;
 
-    public string expectedBatteryType;
-
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null)
         {
             DragDrop draggedItem = eventData.pointerDrag.GetComponent<DragDrop>();
 
-            if (!isOccupied || draggedItem != currentBattery)
+            // Check if the slot is not occupied
+            if (!isOccupied)
             {
-                if (currentBattery != null)
-                {
-                    currentBattery.ResetPosition();
-                    currentBattery = null;
-                }
-
+                // Snap the battery to this slot
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
 
+                // Update slot status and current battery
                 isOccupied = true;
                 currentBattery = draggedItem;
+            }
+            else
+            {
+                // If the slot is occupied, reset the battery's position
+                draggedItem.ResetPosition();
             }
         }
     }
@@ -33,14 +33,5 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     public bool IsSlotOccupied()
     {
         return isOccupied;
-    }
-
-    public bool IsCorrectBatteryInSlot()
-    {
-        if (currentBattery != null)
-        {
-            return currentBattery.batteryType == expectedBatteryType;
-        }
-        return false;
     }
 }

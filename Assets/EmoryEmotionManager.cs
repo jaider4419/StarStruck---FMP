@@ -1,19 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EmotionManager : MonoBehaviour
+public class EmoryEmotionManager : MonoBehaviour
 {
     [System.Serializable]
     public class CharacterEmotionData
     {
         public Slider energySlider;
         public Image emotionImage;
-        public Sprite happySprite;
         public Sprite neutralSprite;
         public Sprite tiredSprite;
         public Sprite friedSprite;
-        public Image portraitImage; // Add the portrait image component here
-        public Sprite happyPortrait;
+        public Image portraitImage; 
         public Sprite neutralPortrait;
         public Sprite tiredPortrait;
         public Sprite friedPortrait;
@@ -26,7 +24,7 @@ public class EmotionManager : MonoBehaviour
         foreach (CharacterEmotionData character in characters)
         {
             UpdateEmotion(character);
-            UpdatePortrait(character); // Call the UpdatePortrait method
+            UpdatePortrait(character); 
         }
 
     }
@@ -35,10 +33,6 @@ public class EmotionManager : MonoBehaviour
     {
         float energyLevel = character.energySlider.value;
         if (energyLevel >= 25f)
-        {
-            character.emotionImage.sprite = character.happySprite;
-        }
-        else if (energyLevel >= 12.5f)
         {
             character.emotionImage.sprite = character.neutralSprite;
         }
@@ -56,10 +50,6 @@ public class EmotionManager : MonoBehaviour
     {
         float energyLevel = character.energySlider.value;
         if (energyLevel >= 25f)
-        {
-            character.portraitImage.sprite = character.happyPortrait;
-        }
-        else if (energyLevel >= 12.5f)
         {
             character.portraitImage.sprite = character.neutralPortrait;
         }
