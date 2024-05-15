@@ -158,6 +158,8 @@ MonoBehaviour:
   - {fileID: 783862881426346564, guid: 3f1846eef9c9b2c4980c8d9c1b1afb6d, type: 3}
   enemyPrefab: {fileID: 3121646250353682764, guid: 1cb5fd1f6a9363b4b8e5098aefff41ad,
     type: 3}
+  anim: {fileID: 0}
+  PlayerBox: {fileID: 0}
   playerBattleStations:
   - {fileID: 2111778287}
   - {fileID: 60215997}
@@ -179,9 +181,12 @@ MonoBehaviour:
   player3AttackButtons:
   - {fileID: 525721240}
   - {fileID: 1862677810}
-  player1ReplenishButton: {fileID: 1925120380}
-  player2ReplenishButton: {fileID: 1540189005}
-  player3ReplenishButton: {fileID: 462984529}
+  player1ReplenishButton:
+  - {fileID: 0}
+  player2ReplenishButton:
+  - {fileID: 0}
+  player3ReplenishButton:
+  - {fileID: 0}
   Testing: {fileID: 2037265713}
   healButtons:
   - {fileID: 1040792075}
