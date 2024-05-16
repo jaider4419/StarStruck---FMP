@@ -13,6 +13,8 @@ public class P2BattleSystem : MonoBehaviour
 
     public Animator anim;
     public Animator PlayerBox;
+    public GameObject phase2CEO;
+    public GameObject phase1CEO;
 
     public Transform[] playerBattleStations; // Array of player battle stations
     public Transform enemyBattleStation;
@@ -55,6 +57,7 @@ public class P2BattleSystem : MonoBehaviour
     {
         state = P2BattleState.START;
         StartCoroutine(SetupBattle());
+        phase1CEO.SetActive(true);
     }
 
     IEnumerator SetupBattle()
@@ -159,10 +162,12 @@ public class P2BattleSystem : MonoBehaviour
 
     void StartSecondPhase()
     {
+        phase1CEO.SetActive(false);
         enemyUnit.Reset(); // Reset enemy state for the second phase
         enemyUnit.isSecondPhase = true; // Set the second phase flag
         enemyHUD.SetHUD(enemyUnit);
-        dialogueText.text = "The boss has regained strength and is back for some more!";
+        dialogueText.text = "THE LIGHTBULB CEO HAS GAINED SOME STRENGTH AND IS BACK FOR SOME MORE!";
+        phase2CEO.SetActive(true);
     }
 
     IEnumerator PlayerHeal(int playerIndex)
