@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7392947}
-  - component: {fileID: 7392946}
   - component: {fileID: 7392948}
   m_Layer: 0
   m_Name: BattleSystem
@@ -141,63 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7392946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7392945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa35f69b8434b0d43ad138070f2dfde4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefabs:
-  - {fileID: 5209060213070396793, guid: a9e8f30393d7dbd4dbd33a2109db32ff, type: 3}
-  - {fileID: 6710825280253908249, guid: 6088abc173da399428f70cddbe6df6a1, type: 3}
-  - {fileID: 783862881426346564, guid: 3f1846eef9c9b2c4980c8d9c1b1afb6d, type: 3}
-  enemyPrefab: {fileID: 3121646250353682764, guid: 1cb5fd1f6a9363b4b8e5098aefff41ad,
-    type: 3}
-  anim: {fileID: 2116236928}
-  PlayerBox: {fileID: 0}
-  playerBattleStations:
-  - {fileID: 2111778287}
-  - {fileID: 60215997}
-  - {fileID: 1922007108}
-  enemyBattleStation: {fileID: 490979728}
-  dialogueText: {fileID: 1492700882}
-  enemyDialogue: {fileID: 1978512865}
-  playerHUDs:
-  - {fileID: 893720428}
-  - {fileID: 333004805}
-  - {fileID: 880133483}
-  enemyHUD: {fileID: 1517477214}
-  player1AttackButtons:
-  - {fileID: 120526572}
-  - {fileID: 1043503247}
-  player2AttackButtons:
-  - {fileID: 1991097229}
-  - {fileID: 447084576}
-  player3AttackButtons:
-  - {fileID: 525721240}
-  - {fileID: 1862677810}
-  player1ReplenishButton: []
-  player2ReplenishButton: []
-  player3ReplenishButton: []
-  Testing: {fileID: 2037265713}
-  healButtons:
-  - {fileID: 1040792075}
-  - {fileID: 1315193351}
-  - {fileID: 1760648198}
-  state: 0
-  playerNames:
-  - CODY
-  - MALLOW
-  - EMORY
-  minDamage: 5
-  maxDamage: 10
-  neutralSprite: {fileID: 0}
 --- !u!4 &7392947
 Transform:
   m_ObjectHideFlags: 0
@@ -231,25 +173,42 @@ MonoBehaviour:
   - {fileID: 783862881426346564, guid: 3f1846eef9c9b2c4980c8d9c1b1afb6d, type: 3}
   enemyPrefab: {fileID: 3121646250353682764, guid: 1cb5fd1f6a9363b4b8e5098aefff41ad,
     type: 3}
-  anim: {fileID: 0}
+  anim: {fileID: 2116236928}
   PlayerBox: {fileID: 0}
-  playerBattleStations: []
-  enemyBattleStation: {fileID: 0}
+  phase2CEO: {fileID: 749957691}
+  phase1CEO: {fileID: 2116236926}
+  playerBattleStations:
+  - {fileID: 2111778287}
+  - {fileID: 60215997}
+  - {fileID: 1922007108}
+  enemyBattleStation: {fileID: 490979728}
   dialogueText: {fileID: 1492700882}
   enemyDialogue: {fileID: 1978512865}
   playerHUDs:
   - {fileID: 893720428}
   - {fileID: 333004805}
   - {fileID: 880133483}
-  enemyHUD: {fileID: 0}
-  player1AttackButtons: []
-  player2AttackButtons: []
-  player3AttackButtons: []
-  player1ReplenishButton: []
-  player2ReplenishButton: []
-  player3ReplenishButton: []
+  enemyHUD: {fileID: 1517477214}
+  player1AttackButtons:
+  - {fileID: 120526572}
+  - {fileID: 1043503247}
+  player2AttackButtons:
+  - {fileID: 1991097229}
+  - {fileID: 447084576}
+  player3AttackButtons:
+  - {fileID: 525721240}
+  - {fileID: 1862677810}
+  player1ReplenishButton:
+  - {fileID: 1925120380}
+  player2ReplenishButton:
+  - {fileID: 1540189005}
+  player3ReplenishButton:
+  - {fileID: 462984529}
   Testing: {fileID: 0}
-  healButtons: []
+  healButtons:
+  - {fileID: 1040792075}
+  - {fileID: 1315193351}
+  - {fileID: 1760648198}
   state: 0
   playerNames:
   - CODY
@@ -563,8 +522,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer1AttackButton1
         m_Mode: 1
         m_Arguments:
@@ -1714,8 +1673,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer2AttackButton2
         m_Mode: 1
         m_Arguments:
@@ -1847,8 +1806,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer3ReplenishButton
         m_Mode: 1
         m_Arguments:
@@ -2130,8 +2089,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer3AttackButton1
         m_Mode: 1
         m_Arguments:
@@ -3283,6 +3242,104 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &749957691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749957692}
+  - component: {fileID: 749957695}
+  - component: {fileID: 749957694}
+  - component: {fileID: 749957693}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &749957692
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749957691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.62873, y: 0.62873, z: 0.62873}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1209233985}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 27}
+  m_SizeDelta: {x: 3000, y: 1687.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &749957693
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749957691}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e044e3c1f32f289438f53da1a9812a85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &749957694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749957691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1947050438, guid: 888a98ee0b4cb1a44981d3f111ec95f3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &749957695
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749957691}
+  m_CullTransparentMesh: 1
 --- !u!1 &800421955
 GameObject:
   m_ObjectHideFlags: 0
@@ -4162,8 +4219,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnHealButton
         m_Mode: 3
         m_Arguments:
@@ -4295,8 +4352,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer1AttackButton2
         m_Mode: 1
         m_Arguments:
@@ -4837,6 +4894,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2116236927}
+  - {fileID: 749957692}
   m_Father: {fileID: 228779439}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5156,8 +5214,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnHealButton
         m_Mode: 3
         m_Arguments:
@@ -5889,8 +5947,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer2ReplenishButton
         m_Mode: 1
         m_Arguments:
@@ -6601,8 +6659,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnHealButton
         m_Mode: 3
         m_Arguments:
@@ -6963,8 +7021,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer3AttackButton2
         m_Mode: 1
         m_Arguments:
@@ -7164,8 +7222,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer1ReplenishButton
         m_Mode: 1
         m_Arguments:
@@ -7794,8 +7852,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7392946}
-        m_TargetAssemblyTypeName: BattleSystem, Assembly-CSharp
+      - m_Target: {fileID: 7392948}
+        m_TargetAssemblyTypeName: P2BattleSystem, Assembly-CSharp
         m_MethodName: OnPlayer2AttackButton1
         m_Mode: 1
         m_Arguments:
@@ -8135,7 +8193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2116236927
 RectTransform:
   m_ObjectHideFlags: 0

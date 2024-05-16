@@ -20,7 +20,7 @@ public class DeathScreen : MonoBehaviour
 
     public void QuitButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Menu");
     }
 
     public void RetryButton()
