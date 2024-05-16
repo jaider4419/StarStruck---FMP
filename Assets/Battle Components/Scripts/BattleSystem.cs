@@ -12,7 +12,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyPrefab;
 
     public Animator anim;
-    public Animator PlayerBox;
+    public string Hit;
+    public string Idle;
 
     public Transform[] playerBattleStations; // Array of player battle stations
     public Transform enemyBattleStation;
@@ -25,7 +26,7 @@ public class BattleSystem : MonoBehaviour
 
     public BattleHUD[] playerHUDs; // Array of player HUDs
     public BattleHUD enemyHUD;
-
+   
     public Button[] player1AttackButtons; // Attack buttons for Player 1
     public Button[] player2AttackButtons; // Attack buttons for Player 2
     public Button[] player3AttackButtons; // Attack buttons for Player 3
@@ -95,7 +96,7 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
-        anim.Play("lambooos");
+        anim.Play(Idle);
 
         // Enable attack and heal buttons for the current player
         switch (currentPlayerIndex)
@@ -173,7 +174,7 @@ public class BattleSystem : MonoBehaviour
 
         currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
         state = BattleState.PLAYERTURN; // Set state to PLAYERTURN
-        PlayerTurn(); // Start the next player's turn
+        PlayerTurn(); // Start the next player's turns
 
         // Enable attack and heal buttons after player's action is completed
         EnableAllButtons();
@@ -206,8 +207,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        anim.Play(Idle);
         dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[currentPlayerIndex] + "!";
-        anim.Play("Hurt");
         yield return new WaitForSeconds(1f);
 
         int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
@@ -272,7 +273,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
-            dialogueText.text = "You WON THE BATTLE!";
+            dialogueText.text = "YOU WON THE BATTLE!";
         }
         else if (state == BattleState.LOST)
         {
@@ -311,36 +312,54 @@ public class BattleSystem : MonoBehaviour
     public void OnPlayer1AttackButton1() // Player 1 Attack 1
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
+        {
+            anim.Play(Hit);
+        }
             StartCoroutine(PlayerAttack(0, 10, 5)); // Player 1, Attack 1
     }
 
     public void OnPlayer1AttackButton2() // Player 1 Attack 2
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
+        {
+            anim.Play(Hit);
+        }
             StartCoroutine(PlayerAttack(0, 15, 10)); // Player 1, Attack 2
     }
 
     public void OnPlayer2AttackButton1() // Player 2 Attack 1
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
+        {
+            anim.Play(Hit);
+        }
             StartCoroutine(PlayerAttack(1, 10, 5)); // Player 2, Attack 1
     }
 
     public void OnPlayer2AttackButton2() // Player 2 Attack 2
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
+        {
+            anim.Play(Hit);
+        }
             StartCoroutine(PlayerAttack(1, 15, 10)); // Player 2, Attack 2
     }
 
     public void OnPlayer3AttackButton1() // Player 3 Attack 1
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
+        {
+            anim.Play(Hit);
+        }
             StartCoroutine(PlayerAttack(2, 15, 5)); // Player 3, Attack 1
     }
 
     public void OnPlayer3AttackButton2() // Player 3 Attack 2
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
+        {
+            anim.Play(Hit);
+        }
             StartCoroutine(PlayerAttack(2, 12, 10)); // Player 3, Attack 2
     }
 
