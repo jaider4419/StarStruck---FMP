@@ -4,6 +4,7 @@ public class BatteryManager : MonoBehaviour
 {
     public ItemSlot[] slots;
     public GameObject winUI;
+    public AudioSource winSound;
 
     private void Update()
     {
@@ -29,5 +30,6 @@ public class BatteryManager : MonoBehaviour
     private void ShowWinUI()
     {
         winUI.SetActive(true);
+        winSound.Play();
     }
 }

@@ -304,7 +304,7 @@ RectTransform:
   m_GameObject: {fileID: 1387563105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25327966, y: 0.25327966, z: 0.25327966}
+  m_LocalScale: {x: 0.23537025, y: 0.23537025, z: 0.23537025}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1637833481}
@@ -446,7 +446,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1549625245}
         m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
-        m_MethodName: RetryButton
+        m_MethodName: QuitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -485,7 +485,7 @@ RectTransform:
   m_GameObject: {fileID: 1444022531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25327966, y: 0.25327966, z: 0.25327966}
+  m_LocalScale: {x: 0.23537025, y: 0.23537025, z: 0.23537025}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 562065850}
