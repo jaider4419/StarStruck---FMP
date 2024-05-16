@@ -159,8 +159,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 3934707338734689439, guid: 9bc63f7cf321bd7498cc8adc50ed5932,
     type: 3}
   anim: {fileID: 2079131971}
-  Hit: HT
-  Idle: BUFFER
+  Hit: Hit
+  Idle: lampbosser
   playerBattleStations:
   - {fileID: 2111778287}
   - {fileID: 60215997}
@@ -6916,7 +6916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: abb12a75ab9aa4a44aa68fa99b359777, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8073,7 +8073,7 @@ RectTransform:
   m_GameObject: {fileID: 2079131969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.6491, y: 5.6491, z: 5.6491}
+  m_LocalScale: {x: 0.36353898, y: 0.36353898, z: 0.36353898}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 228779439}
@@ -8081,8 +8081,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: 399}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 9, y: 374}
+  m_SizeDelta: {x: 3012.5, y: 1700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2079131971
 Animator:
@@ -8094,7 +8094,7 @@ Animator:
   m_GameObject: {fileID: 2079131969}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8b12322e54228be4abdee9a61bcf392a, type: 2}
+  m_Controller: {fileID: 9100000, guid: ffadc2e1abdddba48b29e777c3b8ba25, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8125,7 +8125,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 387346690, guid: 8fd5bc8b214f65849915ee2793fd3b9a, type: 3}
+  m_Sprite: {fileID: 910268895, guid: c251756edaacf3145b9e1ab2521e6d9b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

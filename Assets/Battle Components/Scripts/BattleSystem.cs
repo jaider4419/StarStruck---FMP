@@ -174,7 +174,7 @@ public class BattleSystem : MonoBehaviour
 
         currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
         state = BattleState.PLAYERTURN; // Set state to PLAYERTURN
-        PlayerTurn(); // Start the next player's turn
+        PlayerTurn(); // Start the next player's turns
 
         // Enable attack and heal buttons after player's action is completed
         EnableAllButtons();
@@ -209,7 +209,6 @@ public class BattleSystem : MonoBehaviour
     {
         anim.Play(Idle);
         dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[currentPlayerIndex] + "!";
-        anim.Play(Hit);
         yield return new WaitForSeconds(1f);
 
         int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
@@ -274,7 +273,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (state == BattleState.WON)
         {
-            dialogueText.text = "You WON THE BATTLE!";
+            dialogueText.text = "YOU WON THE BATTLE!";
         }
         else if (state == BattleState.LOST)
         {
