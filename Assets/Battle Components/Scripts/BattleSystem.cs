@@ -171,7 +171,6 @@ public class BattleSystem : MonoBehaviour
 
         playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
         dialogueText.text = playerNames[playerIndex] + " FEELS RENEWED STRENGTH!";
-
         yield return new WaitForSeconds(2f);
 
         currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
