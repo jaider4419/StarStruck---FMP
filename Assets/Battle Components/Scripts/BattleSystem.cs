@@ -8,6 +8,7 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
 public class BattleSystem : MonoBehaviour
 {
+    public string winScene;
     public GameObject[] playerPrefabs; // Array of player prefabs
     public GameObject enemyPrefab;
 
@@ -55,7 +56,8 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         state = BattleState.START;
-        StartCoroutine(SetupBattle());  
+        StartCoroutine(SetupBattle());
+        Cursor.lockState = CursorLockMode.None;
     }
 
     IEnumerator SetupBattle()
@@ -274,6 +276,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "YOU WON THE BATTLE!";
+
+            SceneManager.LoadScene(winScene);
         }
         else if (state == BattleState.LOST)
         {

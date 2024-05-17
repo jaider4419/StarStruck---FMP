@@ -58,6 +58,7 @@ public class P2BattleSystem : MonoBehaviour
         state = P2BattleState.START;
         StartCoroutine(SetupBattle());
         phase1CEO.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     IEnumerator SetupBattle()
@@ -104,7 +105,6 @@ public class P2BattleSystem : MonoBehaviour
             case 2:
                 EnableButtons(player3AttackButtons);
                 break;
-
         }
 
         dialogueText.text = "WHAT WILL " + playerNames[currentPlayerIndex] + " DO?";
@@ -141,8 +141,8 @@ public class P2BattleSystem : MonoBehaviour
         {
             if (!enemyUnit.isSecondPhase)
             {
-                // Start the second phase of the battle if the enemy is defeated in the first phase
-                StartSecondPhase();
+                // Start the transition to the second phase with a delay
+                StartCoroutine(TransitionToSecondPhase());
             }
             else
             {
@@ -160,14 +160,26 @@ public class P2BattleSystem : MonoBehaviour
         EnableAllButtons();
     }
 
+    IEnumerator TransitionToSecondPhase()
+    {
+        dialogueText.text = "THE LIGHTBULB CEO HAS GAINED SOME STRENGTH AND IS BACK FOR SOME MORE!";
+        yield return new WaitForSeconds(2f);
+
+        StartSecondPhase();
+    }
+
     void StartSecondPhase()
     {
         phase1CEO.SetActive(false);
         enemyUnit.Reset(); // Reset enemy state for the second phase
         enemyUnit.isSecondPhase = true; // Set the second phase flag
         enemyHUD.SetHUD(enemyUnit);
-        dialogueText.text = "THE LIGHTBULB CEO HAS GAINED SOME STRENGTH AND IS BACK FOR SOME MORE!";
         phase2CEO.SetActive(true);
+
+        // Set state to PLAYERTURN, reset player index, and start the player's turn
+        currentPlayerIndex = 0;
+        state = P2BattleState.PLAYERTURN;
+        PlayerTurn();
     }
 
     IEnumerator PlayerHeal(int playerIndex)
@@ -364,5 +376,4 @@ public class P2BattleSystem : MonoBehaviour
         // Enable attack and heal buttons after player's action is completed
         EnableAllButtons();
     }
-
 }

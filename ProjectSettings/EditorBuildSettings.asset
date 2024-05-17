@@ -20,10 +20,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MISSIONS/WireTask.unity
     guid: 01e458b9d24ff814584b05a22e917dec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BATTLES/LampBoss.unity
     guid: 86905b0745fcf6840a55a28565fb39e8
   - enabled: 1
     path: Assets/Scenes/DeathScreen.unity
     guid: 8600f6293799c574b87088af7d66559a
+  - enabled: 1
+    path: Assets/Scenes/reception.unity
+    guid: 8bebd6788db857348b4c94302d92ecac
+  - enabled: 1
+    path: Assets/Scenes/MeetingRoom.unity
+    guid: 6e5c428bc19f87247bc43727d555d350
+  - enabled: 1
+    path: Assets/Scenes/BATTLES/BufferBoss.unity
+    guid: 15929957796b13340aabf153eb8fac65
+  - enabled: 1
+    path: Assets/Scenes/Reception2.unity
+    guid: cb36aa7706cfa2048986dfb2a39bdd66
+  - enabled: 1
+    path: Assets/Scenes/BATTLES/RingRingBoss.unity
+    guid: fbf5212f0f66ecb418c5b24b5d7e3aa0
+  - enabled: 1
+    path: Assets/Scenes/Office2.unity
+    guid: d642a443c33d7204cb9627e5b4b08018
+  - enabled: 1
+    path: Assets/Scenes/BATTLES/LightBulbBoss.unity
+    guid: ca0efdf68b008c14a93c10161816e20a
+  - enabled: 1
+    path: Assets/Scenes/office.unity
+    guid: 175dd4a1e8c92ec4fab337543b3f369c
   m_configObjects: {}
