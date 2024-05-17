@@ -42,11 +42,11 @@ public class EmotionManager : MonoBehaviour
         {
             character.emotionImage.sprite = character.neutralSprite;
         }
-        else if (energyLevel > 3.125f)
+        else if (energyLevel >= 3.125f)
         {
             character.emotionImage.sprite = character.tiredSprite;
         }
-        else if (energyLevel > 0f)
+        else if (energyLevel <= 0f)
         {
             character.emotionImage.sprite = character.friedSprite;
         }
@@ -59,15 +59,15 @@ public class EmotionManager : MonoBehaviour
         {
             character.portraitImage.sprite = character.happyPortrait;
         }
-        else if (energyLevel >= 12.5f)
+        else if (energyLevel >= 6.25f)
         {
             character.portraitImage.sprite = character.neutralPortrait;
         }
-        else if (energyLevel > 3.125f)
+        else if (energyLevel >= 3.125f)
         {
             character.portraitImage.sprite = character.tiredPortrait;
         }
-        else if (energyLevel > 0f)
+        else if (energyLevel <= 0f)
         {
             character.portraitImage.sprite = character.friedPortrait;
         }

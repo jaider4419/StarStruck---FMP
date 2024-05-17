@@ -48,8 +48,8 @@ MonoBehaviour:
   unitLevel: 2
   damage: 5
   fatigue: 0
-  maxHP: 30
-  currentHP: 30
-  maxEnergy: 30
-  currentEnergy: 30
+  maxHP: 1
+  currentHP: 1
+  maxEnergy: 1
+  currentEnergy: 1
   isSecondPhase: 0

@@ -261,7 +261,7 @@ public class P2BattleSystem : MonoBehaviour
     {
         if (state == P2BattleState.WON)
         {
-            dialogueText.text = "You WON THE BATTLE!";
+            dialogueText.text = "YOU WON THE BATTLE!";
         }
         else if (state == P2BattleState.LOST)
         {

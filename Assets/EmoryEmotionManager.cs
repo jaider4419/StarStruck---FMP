@@ -32,11 +32,11 @@ public class EmoryEmotionManager : MonoBehaviour
     private void UpdateEmotion(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 15f)
+        if (energyLevel >= 30f)
         {
             character.emotionImage.sprite = character.neutralSprite;
         }
-        else if (energyLevel > 6.25f)
+        else if (energyLevel > 15f)
         {
             character.emotionImage.sprite = character.tiredSprite;
         }
