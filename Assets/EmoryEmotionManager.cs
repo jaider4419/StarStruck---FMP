@@ -32,7 +32,7 @@ public class EmoryEmotionManager : MonoBehaviour
     private void UpdateEmotion(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 25f)
+        if (energyLevel >= 15f)
         {
             character.emotionImage.sprite = character.neutralSprite;
         }
@@ -49,7 +49,7 @@ public class EmoryEmotionManager : MonoBehaviour
     private void UpdatePortrait(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 25f)
+        if (energyLevel >= 15f)
         {
             character.portraitImage.sprite = character.neutralPortrait;
         }

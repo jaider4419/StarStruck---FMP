@@ -34,15 +34,15 @@ public class EmotionManager : MonoBehaviour
     private void UpdateEmotion(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 25f)
+        if (energyLevel >= 15f)
         {
             character.emotionImage.sprite = character.happySprite;
         }
-        else if (energyLevel >= 12.5f)
+        else if (energyLevel >= 6.25f)
         {
             character.emotionImage.sprite = character.neutralSprite;
         }
-        else if (energyLevel > 6.25f)
+        else if (energyLevel > 3.125f)
         {
             character.emotionImage.sprite = character.tiredSprite;
         }
@@ -55,7 +55,7 @@ public class EmotionManager : MonoBehaviour
     private void UpdatePortrait(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 25f)
+        if (energyLevel >= 15f)
         {
             character.portraitImage.sprite = character.happyPortrait;
         }
@@ -63,7 +63,7 @@ public class EmotionManager : MonoBehaviour
         {
             character.portraitImage.sprite = character.neutralPortrait;
         }
-        else if (energyLevel > 6.25f)
+        else if (energyLevel > 3.125f)
         {
             character.portraitImage.sprite = character.tiredPortrait;
         }
