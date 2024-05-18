@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 783862881426346564, guid: 3f1846eef9c9b2c4980c8d9c1b1afb6d, type: 3}
   enemyPrefab: {fileID: 4214883145737465442, guid: 586a76b1e63dca148acb885e34a6b55f,
     type: 3}
+  DeathScreen: RingRingDeathScreen
   anim: {fileID: 2079131974}
   Hit: bufferHit
   Idle: bufferr
@@ -201,7 +202,6 @@ MonoBehaviour:
   - EMORY
   minDamage: 5
   maxDamage: 10
-  neutralSprite: {fileID: 0}
 --- !u!4 &7392947
 Transform:
   m_ObjectHideFlags: 0
@@ -1373,6 +1373,8 @@ MonoBehaviour:
   nameText: {fileID: 135511283}
   hpSlider: {fileID: 266295413}
   energySlider: {fileID: 678039183}
+  playerHUDFrame: {fileID: 0}
+  glowEffect: {fileID: 0}
 --- !u!1 &399071664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,6 +2330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters:
   - energySlider: {fileID: 430547359}
+    healthSlider: {fileID: 0}
     emotionImage: {fileID: 871253078}
     happySprite: {fileID: 21300000, guid: a48d733a4489fa343a003f6b7bf88f2d, type: 3}
     neutralSprite: {fileID: 21300000, guid: 51ca99097e975a549be7c61a0e77d483, type: 3}
@@ -2339,6 +2342,7 @@ MonoBehaviour:
     tiredPortrait: {fileID: 21300000, guid: 74e1594e1c73ca84da4af309f9ad54f5, type: 3}
     friedPortrait: {fileID: 21300000, guid: d2b46d31b3151df469cde19ac4593885, type: 3}
   - energySlider: {fileID: 678039183}
+    healthSlider: {fileID: 0}
     emotionImage: {fileID: 126268030}
     happySprite: {fileID: 21300000, guid: a48d733a4489fa343a003f6b7bf88f2d, type: 3}
     neutralSprite: {fileID: 21300000, guid: 51ca99097e975a549be7c61a0e77d483, type: 3}
@@ -2378,11 +2382,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters:
   - energySlider: {fileID: 1446584074}
+    healthSlider: {fileID: 0}
     emotionImage: {fileID: 1714283539}
+    happySprite: {fileID: 0}
     neutralSprite: {fileID: 21300000, guid: 51ca99097e975a549be7c61a0e77d483, type: 3}
     tiredSprite: {fileID: 21300000, guid: 62f8701c44087a344b8c324011da063b, type: 3}
     friedSprite: {fileID: 21300000, guid: c8200b3a92dbeaa4db166261ac292bc3, type: 3}
     portraitImage: {fileID: 577044467}
+    happyPortrait: {fileID: 0}
     neutralPortrait: {fileID: 21300000, guid: 18450b5b197c02144a6102ba5d9880dc, type: 3}
     tiredPortrait: {fileID: 21300000, guid: 77990384c57bce747b6f865859ae7d8b, type: 3}
     friedPortrait: {fileID: 21300000, guid: 54b54c31028cd3d4bbfd134d59249ab6, type: 3}
@@ -3849,6 +3856,8 @@ MonoBehaviour:
   nameText: {fileID: 740405816}
   hpSlider: {fileID: 1600897881}
   energySlider: {fileID: 1446584074}
+  playerHUDFrame: {fileID: 0}
+  glowEffect: {fileID: 0}
 --- !u!1 &893720426
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,6 +3910,8 @@ MonoBehaviour:
   nameText: {fileID: 1990085701}
   hpSlider: {fileID: 399071666}
   energySlider: {fileID: 430547359}
+  playerHUDFrame: {fileID: 0}
+  glowEffect: {fileID: 0}
 --- !u!1 &909481431
 GameObject:
   m_ObjectHideFlags: 0
@@ -5622,6 +5633,8 @@ MonoBehaviour:
   nameText: {fileID: 800421957}
   hpSlider: {fileID: 743161864}
   energySlider: {fileID: 1986065440}
+  playerHUDFrame: {fileID: 0}
+  glowEffect: {fileID: 0}
 --- !u!114 &1517477215
 MonoBehaviour:
   m_ObjectHideFlags: 0

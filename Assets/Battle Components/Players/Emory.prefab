@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Emory
-  unitLevel: 0
+  unitLevel: 1
   damage: 5
   fatigue: 0
-  maxHP: 1
-  currentHP: 1
-  maxEnergy: 1
-  currentEnergy: 1
+  maxHP: 30
+  currentHP: 30
+  maxEnergy: 30
+  currentEnergy: 15
   isSecondPhase: 0

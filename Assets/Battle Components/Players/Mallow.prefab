@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Mallow
-  unitLevel: 2
+  unitLevel: 1
   damage: 5
   fatigue: 0
   maxHP: 30

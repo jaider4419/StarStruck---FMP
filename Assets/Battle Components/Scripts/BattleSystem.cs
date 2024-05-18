@@ -11,6 +11,7 @@ public class BattleSystem : MonoBehaviour
     public string winScene;
     public GameObject[] playerPrefabs; // Array of player prefabs
     public GameObject enemyPrefab;
+    public string DeathScreen;
 
     public Animator anim;
     public string Hit;
@@ -27,7 +28,7 @@ public class BattleSystem : MonoBehaviour
 
     public BattleHUD[] playerHUDs; // Array of player HUDs
     public BattleHUD enemyHUD;
-   
+
     public Button[] player1AttackButtons; // Attack buttons for Player 1
     public Button[] player2AttackButtons; // Attack buttons for Player 2
     public Button[] player3AttackButtons; // Attack buttons for Player 3
@@ -50,7 +51,6 @@ public class BattleSystem : MonoBehaviour
     // Damage range for random attacks
     public int minDamage = 5;
     public int maxDamage = 10;
-    public Sprite neutralSprite; // Reference to the neutral emotion sprite
 
     // Start is called before the first frame update
     void Start()
@@ -72,18 +72,10 @@ public class BattleSystem : MonoBehaviour
             playerHUDs[i].SetHUD(playerUnits[i]);
         }
 
-
-        
-
-
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        
-
-
         enemyHUD.SetHUD(enemyUnit);
-
 
         dialogueText.text = enemyUnit.unitName + " WANTS YOU TO PAY FOR YOUR CRIMES!";
         enemyDialogue.text = "COUNT YOUR DAYS!";
@@ -98,27 +90,43 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
-        anim.Play(Idle);
-
-        // Enable attack and heal buttons for the current player
-        switch (currentPlayerIndex)
+        // Disable glow effect for all players' HUD frames
+        foreach (BattleHUD hud in playerHUDs)
         {
-            case 0:
-                EnableButtons(player1AttackButtons);
-                break;
-            case 1:
-                EnableButtons(player2AttackButtons);
-                break;
-            case 2:
-                EnableButtons(player3AttackButtons);
-                break;
-
+            hud.ToggleGlow(false);
         }
 
-        dialogueText.text = "WHAT WILL " + playerNames[currentPlayerIndex] + " DO?";
+        // Enable glow effect for the current player's HUD frame
+        playerHUDs[currentPlayerIndex].ToggleGlow(true);
+
+        anim.Play(Idle);
+
+        // Check if the current player's energy is above 0 before allowing their turn
+        if (playerUnits[currentPlayerIndex].currentEnergy > 0)
+        {
+            // Enable attack and heal buttons for the current player
+            switch (currentPlayerIndex)
+            {
+                case 0:
+                    EnableButtons(player1AttackButtons);
+                    break;
+                case 1:
+                    EnableButtons(player2AttackButtons);
+                    break;
+                case 2:
+                    EnableButtons(player3AttackButtons);
+                    break;
+            }
+
+            dialogueText.text = "WHAT WILL " + playerNames[currentPlayerIndex] + " DO?";
+        }
+        else
+        {
+            // Skip the turn if energy is 0
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length;
+            PlayerTurn();
+        }
     }
-
-
 
     void EnableButtons(Button[] buttons)
     {
@@ -171,14 +179,12 @@ public class BattleSystem : MonoBehaviour
 
         playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
         dialogueText.text = playerNames[playerIndex] + " FEELS RENEWED STRENGTH!";
+
         yield return new WaitForSeconds(2f);
 
-        currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
-        state = BattleState.PLAYERTURN; // Set state to PLAYERTURN
-        PlayerTurn(); // Start the next player's turns
-
-        // Enable attack and heal buttons after player's action is completed
-        EnableAllButtons();
+        // Trigger enemy's turn after player heals
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurnAndProceed(playerIndex));
     }
 
     IEnumerator PlayerReplenish(int playerIndex)
@@ -193,57 +199,42 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-
-        currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
-        state = BattleState.PLAYERTURN; // Set state to PLAYERTURN
-        PlayerTurn(); // Start the next player's turn
-
-        // Enable attack and heal buttons after player's action is completed
-        EnableAllButtons();
+        // Trigger enemy's turn after player replenishes
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurnAndProceed(playerIndex));
     }
 
-
-
-
-
-    IEnumerator EnemyTurn()
+    // Updated EnemyTurnAndProceed Coroutine to accept the playerIndex parameter
+    IEnumerator EnemyTurnAndProceed(int playerIndex)
     {
         anim.Play(Idle);
-        dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[currentPlayerIndex] + "!";
+        dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[playerIndex] + "!";
+
         yield return new WaitForSeconds(1f);
 
-        int damage = Random.Range(minDamage, maxDamage + 1); // Generate random damage
+        int baseDamage = Random.Range(minDamage, maxDamage + 1); // Generate base random damage
+        int damage = baseDamage;
+
         int fatigue = 10;
 
-        bool isDead = playerUnits[currentPlayerIndex].TakeDamage(damage);
-        bool isSleeping = playerUnits[currentPlayerIndex].TakeFatigue(fatigue);
+        bool isDead = playerUnits[playerIndex].TakeDamage(damage);
+        bool isSleeping = playerUnits[playerIndex].TakeFatigue(fatigue);
 
-        playerHUDs[currentPlayerIndex].SetHP(playerUnits[currentPlayerIndex].currentHP);
-        playerHUDs[currentPlayerIndex].SetEnergy(playerUnits[currentPlayerIndex].currentEnergy);
+        playerHUDs[playerIndex].SetHP(playerUnits[playerIndex].currentHP);
+        playerHUDs[playerIndex].SetEnergy(playerUnits[playerIndex].currentEnergy);
 
         if (isDead)
         {
-
-            dialogueText.text = playerNames[currentPlayerIndex] + " HAS NO HEALTH!";
-            // Mark the defeated player as inactive
-            playerUnits[currentPlayerIndex].gameObject.SetActive(false);
-            // Announce the defeated player
-
+            dialogueText.text = playerNames[playerIndex] + " HAS NO HEALTH!";
+            playerUnits[playerIndex].gameObject.SetActive(false);
             yield return new WaitForSeconds(2f);
-
         }
 
         if (isSleeping)
         {
-
-            dialogueText.text = playerNames[currentPlayerIndex] + " IS LOW ON ENERGY AND IS SLEEPING!";
-
-
-            playerUnits[currentPlayerIndex].gameObject.SetActive(false);
-
+            dialogueText.text = playerNames[playerIndex] + " IS LOW ON ENERGY AND IS SLEEPING!";
+            playerUnits[playerIndex].gameObject.SetActive(false);
             yield return new WaitForSeconds(2f);
-
-            
         }
 
         // Check if all players are defeated
@@ -264,25 +255,93 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length; // Rotate to the next player
+            // Proceed to the next player's turn
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length;
+
+            // Skip dead players
+            while (!playerUnits[currentPlayerIndex].isActiveAndEnabled)
+            {
+                currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length;
+            }
+
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
     }
+
+
+
+
+    IEnumerator EnemyTurn()
+    {
+        anim.Play(Idle);
+        dialogueText.text = enemyUnit.unitName + " ATTACKS " + playerNames[currentPlayerIndex] + "!";
+
+        yield return new WaitForSeconds(1f);
+
+        int baseDamage = Random.Range(minDamage, maxDamage + 1); // Generate base random damage
+        int damage = baseDamage;
+
+        int fatigue = 10;
+
+        bool isDead = playerUnits[currentPlayerIndex].TakeDamage(damage);
+        bool isSleeping = playerUnits[currentPlayerIndex].TakeFatigue(fatigue);
+
+        playerHUDs[currentPlayerIndex].SetHP(playerUnits[currentPlayerIndex].currentHP);
+        playerHUDs[currentPlayerIndex].SetEnergy(playerUnits[currentPlayerIndex].currentEnergy);
+
+        if (isDead)
+        {
+            dialogueText.text = playerNames[currentPlayerIndex] + " IS FRIED!";
+            playerUnits[currentPlayerIndex].gameObject.SetActive(false);
+            yield return new WaitForSeconds(2f);
+        }
+
+        if (isSleeping)
+        {
+            dialogueText.text = playerNames[currentPlayerIndex] + " IS FRIED!";
+            playerUnits[currentPlayerIndex].gameObject.SetActive(false);
+            yield return new WaitForSeconds(2f);
+        }
+
+        // Check if all players are defeated
+        bool allPlayersDefeated = true;
+        foreach (Unit playerUnit in playerUnits)
+        {
+            if (playerUnit.isActiveAndEnabled)
+            {
+                allPlayersDefeated = false;
+                break;
+            }
+        }
+
+        if (allPlayersDefeated)
+        {
+            state = BattleState.LOST;
+            EndBattle();
+        }
+        else
+        {
+            // Set the next player to be attacked by the boss
+            state = BattleState.PLAYERTURN;
+            currentPlayerIndex = (currentPlayerIndex + 1) % playerUnits.Length;
+            PlayerTurn();
+        }
+    }
+
+
 
     void EndBattle()
     {
         if (state == BattleState.WON)
         {
             dialogueText.text = "YOU WON THE BATTLE!";
-
             SceneManager.LoadScene(winScene);
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "YOU HAVE LOST THE BATTLE.";
-
-            SceneManager.LoadScene("DeathScreen");
+            SceneManager.LoadScene(DeathScreen);
         }
     }
 
@@ -310,15 +369,14 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-
     // Button click events for player attacks
     public void OnPlayer1AttackButton1() // Player 1 Attack 1
     {
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
         {
             anim.Play(Hit);
-        }
             StartCoroutine(PlayerAttack(0, 10, 5)); // Player 1, Attack 1
+        }
     }
 
     public void OnPlayer1AttackButton2() // Player 1 Attack 2
@@ -326,8 +384,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 0)
         {
             anim.Play(Hit);
-        }
             StartCoroutine(PlayerAttack(0, 15, 10)); // Player 1, Attack 2
+        }
     }
 
     public void OnPlayer2AttackButton1() // Player 2 Attack 1
@@ -335,8 +393,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
         {
             anim.Play(Hit);
-        }
             StartCoroutine(PlayerAttack(1, 10, 5)); // Player 2, Attack 1
+        }
     }
 
     public void OnPlayer2AttackButton2() // Player 2 Attack 2
@@ -344,8 +402,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 1)
         {
             anim.Play(Hit);
-        }
             StartCoroutine(PlayerAttack(1, 15, 10)); // Player 2, Attack 2
+        }
     }
 
     public void OnPlayer3AttackButton1() // Player 3 Attack 1
@@ -353,8 +411,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
         {
             anim.Play(Hit);
-        }
             StartCoroutine(PlayerAttack(2, 15, 5)); // Player 3, Attack 1
+        }
     }
 
     public void OnPlayer3AttackButton2() // Player 3 Attack 2
@@ -362,8 +420,8 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
         {
             anim.Play(Hit);
-        }
             StartCoroutine(PlayerAttack(2, 12, 10)); // Player 3, Attack 2
+        }
     }
 
     // Button click event for heal
@@ -391,4 +449,5 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.PLAYERTURN && currentPlayerIndex == 2)
             StartCoroutine(PlayerReplenish(2)); // Replenish for Player 3
     }
+
 }

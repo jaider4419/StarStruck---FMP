@@ -1,129 +1,108 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
-    public GameObject dialoguePanel; // Reference to the UI panel containing the dialogue
-    public TMP_Text dialogueText; // Reference to the TextMeshPro text component where the dialogue will be shown
-    public string[] dialogues; // Array of dialogues to be displayed
-    public TMP_FontAsset dialogueFont; // Custom font for the dialogue text
+    public TextMeshProUGUI dialogueText;
+    public GameObject dialogueUI;
+    public Button nextButton;
+    private string[] dialogues;
+    private GameObject[] dialogueObjects;
+    private int currentDialogueIndex = 0;
+    private CharacterController playerController;
 
-    private bool isTyping = false;
-    private float nextLetterTime;
-    private int currentDialogueIndex;
-    private int currentLetterIndex;
-    private bool inTrigger = false;
-    private bool dialoguesStarted = false; // Indicates if the dialogues have started
-
-    void Start()
+    private void Start()
     {
-        // Hide the dialogue panel initially
-        dialoguePanel.SetActive(false);
-        // Set the font for the dialogue text
-        dialogueText.font = dialogueFont;
+        dialogueUI.SetActive(false);
+        nextButton.onClick.AddListener(DisplayNextDialogue);
     }
 
-    void Update()
+    public void StartDialogue(string[] dialogueLines, GameObject[] objectsToActivate, CharacterController playerCtrl)
     {
-        if (dialoguesStarted)
-        {
-            // Check if currently typing and if it's time to display the next letter
-            if (isTyping && Time.time >= nextLetterTime)
-            {
-                dialogueText.text = dialogues[currentDialogueIndex].Substring(0, currentLetterIndex);
-                currentLetterIndex++;
+        dialogues = dialogueLines;
+        dialogueObjects = objectsToActivate;
+        playerController = playerCtrl;
 
-                // If all letters are shown, stop typing
-                if (currentLetterIndex > dialogues[currentDialogueIndex].Length)
-                {
-                    isTyping = false;
-                }
-                else
-                {
-                    // Calculate the time for the next letter, considering typing speed multiplier
-                    nextLetterTime = Time.time;
-                }
-            }
-        }
-
-        // Check for left mouse button press to advance through dialogues only when player is in the trigger
-        if (inTrigger && Input.GetMouseButtonDown(0))
-        {
-            if (!isTyping && !dialoguesStarted)
-            {
-                StartDialogue();
-            }
-            else if (!isTyping && dialoguesStarted)
-            {
-                currentDialogueIndex++;
-                if (currentDialogueIndex < dialogues.Length)
-                {
-                    StartDialogue();
-                }
-                else
-                {
-                    EndDialogue();
-                }
-            }
-            else if (isTyping)
-            {
-                // If typing, skip to the end of the current dialogue
-                SkipTyping();
-            }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            inTrigger = true;
-            if (!dialoguesStarted)
-            {
-                StartDialogue();
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            inTrigger = false;
-            Destroy(gameObject);
-            dialoguePanel.gameObject.SetActive(false);
-        }
-    }
-
-    void StartDialogue()
-    {
-        // Reset text and index
-        dialogueText.text = "";
-        currentLetterIndex = 0;
-
-        // Show the dialogue panel
-        dialoguePanel.SetActive(true);
-
-        // Start typing the current dialogue
-        isTyping = true;
-        nextLetterTime = Time.time;
-
-        dialoguesStarted = true;
-    }
-
-    void SkipTyping()
-    {
-        // Skip to the end of the current dialogue
+        currentDialogueIndex = 0;
+        dialogueUI.SetActive(true);
         dialogueText.text = dialogues[currentDialogueIndex];
-        currentLetterIndex = dialogues[currentDialogueIndex].Length;
-        isTyping = false;
+
+        ActivateGameObjectForDialogue(currentDialogueIndex);
+
+        if (playerController != null)
+        {
+            FreezePlayerMovement(true); // Disable player movement
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
-    void EndDialogue()
+    public void DisplayNextDialogue()
     {
-        // Hide the dialogue panel
-        dialoguePanel.SetActive(false);
-        dialoguesStarted = false;
-        Destroy(gameObject);
+        currentDialogueIndex++;
+
+        if (currentDialogueIndex < dialogues.Length)
+        {
+            dialogueText.text = dialogues[currentDialogueIndex];
+            ActivateGameObjectForDialogue(currentDialogueIndex);
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    private void ActivateGameObjectForDialogue(int index)
+    {
+        if (dialogueObjects != null)
+        {
+            for (int i = 0; i < dialogueObjects.Length; i++)
+            {
+                if (dialogueObjects[i] != null)
+                {
+                    dialogueObjects[i].SetActive(i == index);
+                }
+            }
+        }
+    }
+
+    private void EndDialogue()
+    {
+        dialogueUI.SetActive(false);
+
+        if (playerController != null)
+        {
+            FreezePlayerMovement(false); // Enable player movement
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        // Deactivate all dialogue objects
+        if (dialogueObjects != null)
+        {
+            foreach (var obj in dialogueObjects)
+            {
+                if (obj != null)
+                {
+                    obj.SetActive(false);
+                }
+            }
+        }
+    }
+
+    private void FreezePlayerMovement(bool freeze)
+    {
+        playerController.enabled = !freeze;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && dialogueUI.activeSelf)
+        {
+            DisplayNextDialogue();
+        }
     }
 }

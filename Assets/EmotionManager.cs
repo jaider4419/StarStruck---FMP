@@ -7,6 +7,7 @@ public class EmotionManager : MonoBehaviour
     public class CharacterEmotionData
     {
         public Slider energySlider;
+        public Slider healthSlider;  // Add the health slider here
         public Image emotionImage;
         public Sprite happySprite;
         public Sprite neutralSprite;
@@ -25,51 +26,63 @@ public class EmotionManager : MonoBehaviour
     {
         foreach (CharacterEmotionData character in characters)
         {
-            UpdateEmotion(character);
-            UpdatePortrait(character); // Call the UpdatePortrait method
+            if (character.energySlider != null && character.healthSlider != null)
+            {
+                UpdateEmotion(character);
+                UpdatePortrait(character); // Call the UpdatePortrait method
+            }
+            else
+            {
+                Debug.LogError("Energy or health slider is not assigned for a character.");
+            }
         }
-
     }
 
     private void UpdateEmotion(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 15f)
+        float healthLevel = character.healthSlider.value;
+        Debug.Log("Energy Level: " + energyLevel); // Debug log to check the energy level value
+        Debug.Log("Health Level: " + healthLevel); // Debug log to check the health level value
+
+        if (healthLevel <= 0f || energyLevel <= 0f)
         {
-            character.emotionImage.sprite = character.happySprite;
+            character.emotionImage.sprite = character.friedSprite;
         }
-        else if (energyLevel >= 6.25f)
-        {
-            character.emotionImage.sprite = character.neutralSprite;
-        }
-        else if (energyLevel >= 3.125f)
+        else if (energyLevel <= 6.25f)
         {
             character.emotionImage.sprite = character.tiredSprite;
         }
-        else if (energyLevel <= 0f)
+        else if (energyLevel <= 15f)
         {
-            character.emotionImage.sprite = character.friedSprite;
+            character.emotionImage.sprite = character.neutralSprite;
+        }
+        else
+        {
+            character.emotionImage.sprite = character.happySprite;
         }
     }
 
     private void UpdatePortrait(CharacterEmotionData character)
     {
         float energyLevel = character.energySlider.value;
-        if (energyLevel >= 15f)
+        float healthLevel = character.healthSlider.value;
+
+        if (healthLevel <= 0f || energyLevel <= 0f)
         {
-            character.portraitImage.sprite = character.happyPortrait;
+            character.portraitImage.sprite = character.friedPortrait;
         }
-        else if (energyLevel >= 6.25f)
-        {
-            character.portraitImage.sprite = character.neutralPortrait;
-        }
-        else if (energyLevel >= 3.125f)
+        else if (energyLevel <= 6.25f)
         {
             character.portraitImage.sprite = character.tiredPortrait;
         }
-        else if (energyLevel <= 0f)
+        else if (energyLevel <= 15f)
         {
-            character.portraitImage.sprite = character.friedPortrait;
+            character.portraitImage.sprite = character.neutralPortrait;
+        }
+        else
+        {
+            character.portraitImage.sprite = character.happyPortrait;
         }
     }
 }
