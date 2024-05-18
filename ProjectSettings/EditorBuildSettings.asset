@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DEATH SCREENS/RingRingDeathScreen.unity
     guid: b3eed36f43ba7284d8d3a607dd5d33cb
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 3ac0272a4997b5b468e2af5b74dd84b5
   m_configObjects: {}
