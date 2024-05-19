@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BATTLES/LampBoss.unity
     guid: 86905b0745fcf6840a55a28565fb39e8
   - enabled: 1
+    path: Assets/Scenes/BATTLES/RealLampBoss.unity
+    guid: 7fd927897650ade4bb8ba5e52819fb67
+  - enabled: 1
     path: Assets/Scenes/DEATH SCREENS/BufferDeathScreen.unity
     guid: 8600f6293799c574b87088af7d66559a
   - enabled: 1

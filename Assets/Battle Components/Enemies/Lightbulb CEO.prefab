@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: LIGHTBULB CEO
   unitLevel: 0
-  damage: 30
+  damage: 4
   fatigue: 0
-  maxHP: 20
-  currentHP: 20
+  maxHP: 75
+  currentHP: 75
   maxEnergy: 0
   currentEnergy: 0
   isSecondPhase: 0

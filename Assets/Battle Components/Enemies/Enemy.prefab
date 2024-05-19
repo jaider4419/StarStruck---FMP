@@ -47,5 +47,9 @@ MonoBehaviour:
   unitName: Lightbulb man
   unitLevel: 2
   damage: 5
-  maxHP: 30
-  currentHP: 30
+  fatigue: 0
+  maxHP: 75
+  currentHP: 75
+  maxEnergy: 0
+  currentEnergy: 0
+  isSecondPhase: 0

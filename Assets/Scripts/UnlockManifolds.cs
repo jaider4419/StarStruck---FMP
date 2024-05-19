@@ -87,16 +87,19 @@ public class UnlockManifolds : MonoBehaviour
 
     void ReturnToGame()
     {
-        SwitchScene();
+        ReturnToCity();
     }
 
-    public void SwitchScene()
+
+    public void ReturnToCity()
     {
-
-        SceneManager.LoadScene("First");
+        GameObject gameManager = GameObject.Find("GameManager2");
+        if (gameManager != null)
+        {
+            gameManager.GetComponent<GameManager2>().LoadScene("First");
+        }
     }
- 
 
-  
-    
+
+
 }

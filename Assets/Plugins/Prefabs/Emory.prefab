@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8295937284741610851}
   - component: {fileID: 7575923308528700113}
   - component: {fileID: 6211997241524489411}
-  - component: {fileID: 1642550358455554375}
+  - component: {fileID: 5983654264410851795}
   m_Layer: 9
   m_Name: emory gfx
   m_TagString: Untagged
@@ -107,8 +107,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &1642550358455554375
-BoxCollider:
+--- !u!136 &5983654264410851795
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,14 +120,16 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.6371466, y: 2.966729, z: 0.2}
-  m_Center: {x: -0.049518596, y: 0.07913372, z: 0.00000011955484}
+  serializedVersion: 2
+  m_Radius: 0.61
+  m_Height: 2.56
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.000015258789, z: 0}
 --- !u!1 &3076710454590025064
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +163,7 @@ Transform:
   m_Children:
   - {fileID: 8295937284741610851}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -49.758, z: 0}
 --- !u!114 &2632995861674894566
 MonoBehaviour:

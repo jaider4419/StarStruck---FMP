@@ -1483,7 +1483,6 @@ MonoBehaviour:
   Winner: {fileID: 1380922572}
   WinSound: {fileID: 122331177}
   Wrong: {fileID: 1660899323}
-  sceneToLoad: First
 --- !u!4 &902197580
 Transform:
   m_ObjectHideFlags: 0

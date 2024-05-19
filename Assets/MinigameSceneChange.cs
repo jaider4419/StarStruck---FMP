@@ -1,24 +1,40 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MinigameSceneChange : MonoBehaviour, IInteractable
 {
     [SerializeField] private string prompt;
-    public string sceneToLoad;
-    public string InteractionPrompt => prompt;
-    public GameObject toDestroy;
-    public PlayerManager playerManager;
+    [SerializeField] private string sceneToLoad;
+    [SerializeField] private GameObject toDestroy;
 
-    public void TransitionToMinigame()
-    {
-        playerManager.SaveCheckpointPositions(); // Save checkpoint positions before transitioning
-        SceneManager.LoadScene(sceneToLoad);
-    }
+    public string InteractionPrompt => prompt;
 
     public bool Interact(Interactor interactor)
     {
-        Debug.Log("Changing Scene.");
-        TransitionToMinigame();
+        Debug.Log("Leaving the city.");
+
+        // Save player position before leaving the city
+        GameObject gameManager = GameObject.Find("GameManager2");
+        if (gameManager != null)
+        {
+            gameManager.GetComponent<GameManager2>().SavePlayerPosition();
+        }
+
+        // Load the minigame scene
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            gameManager.GetComponent<GameManager2>().LoadScene(sceneToLoad);
+        }
+        else
+        {
+            Debug.LogError("No scene specified to load.");
+        }
+
+        // Optionally destroy the specified GameObject
+        if (toDestroy != null)
+        {
+            Destroy(toDestroy);
+        }
+
         return true;
     }
 }
