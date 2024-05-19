@@ -57,7 +57,7 @@ public class UnlockManifolds : MonoBehaviour
             if (currentIndex >= buttons.Length)
             {
                 Winner.SetActive(true);
-                Invoke("ReturnToGame", 2f);
+                Invoke("ReturnToGame", 1f);
                 WinSound.Play();
 
             }
@@ -87,6 +87,16 @@ public class UnlockManifolds : MonoBehaviour
 
     void ReturnToGame()
     {
+        SwitchScene();
+    }
+
+    public void SwitchScene()
+    {
+
         SceneManager.LoadScene("First");
     }
+ 
+
+  
+    
 }
