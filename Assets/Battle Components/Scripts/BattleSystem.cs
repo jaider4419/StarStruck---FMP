@@ -336,12 +336,21 @@ public class BattleSystem : MonoBehaviour
         if (state == BattleState.WON)
         {
             dialogueText.text = "YOU WON THE BATTLE!";
-            SceneManager.LoadScene(winScene);
+            ReturnToCity();
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "YOU HAVE LOST THE BATTLE.";
             SceneManager.LoadScene(DeathScreen);
+        }
+    }
+
+    public void ReturnToCity()
+    {
+        GameObject gameManager = GameObject.Find("GameManager2");
+        if (gameManager != null)
+        {
+            gameManager.GetComponent<GameManager2>().LoadScene(winScene);
         }
     }
 

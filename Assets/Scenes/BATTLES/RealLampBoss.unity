@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 5209060213070396793, guid: a9e8f30393d7dbd4dbd33a2109db32ff, type: 3}
   - {fileID: 6710825280253908249, guid: 6088abc173da399428f70cddbe6df6a1, type: 3}
   - {fileID: 783862881426346564, guid: 3f1846eef9c9b2c4980c8d9c1b1afb6d, type: 3}
-  enemyPrefab: {fileID: 3934707338734689439, guid: 9bc63f7cf321bd7498cc8adc50ed5932,
+  enemyPrefab: {fileID: 7643991302704236618, guid: ba224ed9701d41847924d1a6e220d182,
     type: 3}
   DeathScreen: LampBossDeathScreen
   anim: {fileID: 2079131971}

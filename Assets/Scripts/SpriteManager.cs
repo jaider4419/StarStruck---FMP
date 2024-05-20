@@ -50,6 +50,15 @@ public class SpriteManager : MonoBehaviour
 
     public void ReturnToScene()
     {
-        SceneManager.LoadScene(sceneName);
+        ReturnToCity();
+    }
+
+    public void ReturnToCity()
+    {
+        GameObject gameManager = GameObject.Find("GameManager2");
+        if (gameManager != null)
+        {
+            gameManager.GetComponent<GameManager2>().LoadScene("First");
+        }
     }
 }

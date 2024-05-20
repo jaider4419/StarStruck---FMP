@@ -59,6 +59,15 @@ public class GameManager : MonoBehaviour
 
     void ReturnToGame()
     {
-        SceneManager.LoadScene("First");
+        ReturnToCity();
+    }
+
+    public void ReturnToCity()
+    {
+        GameObject gameManager = GameObject.Find("GameManager2");
+        if (gameManager != null)
+        {
+            gameManager.GetComponent<GameManager2>().LoadScene("First");
+        }
     }
 }
