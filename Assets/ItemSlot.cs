@@ -12,19 +12,19 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         {
             DragDrop draggedItem = eventData.pointerDrag.GetComponent<DragDrop>();
 
-            // Check if the slot is not occupied
+            
             if (!isOccupied)
             {
-                // Snap the battery to this slot
+                
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
 
-                // Update slot status and current battery
+                
                 isOccupied = true;
                 currentBattery = draggedItem;
             }
             else
             {
-                // If the slot is occupied, reset the battery's position
+                
                 draggedItem.ResetPosition();
             }
         }

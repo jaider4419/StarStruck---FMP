@@ -485,9 +485,6 @@ GameObject:
   - component: {fileID: 492685356}
   - component: {fileID: 492685355}
   - component: {fileID: 492685357}
-  - component: {fileID: 492685360}
-  - component: {fileID: 492685359}
-  - component: {fileID: 492685361}
   m_Layer: 5
   m_Name: orange
   m_TagString: Untagged
@@ -566,58 +563,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryType: Orange
---- !u!114 &492685359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492685353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!223 &492685360
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492685353}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!225 &492685361
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492685353}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &494451243
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +703,6 @@ GameObject:
   - component: {fileID: 533691581}
   - component: {fileID: 533691580}
   - component: {fileID: 533691582}
-  - component: {fileID: 533691583}
   m_Layer: 5
   m_Name: green
   m_TagString: Untagged
@@ -837,18 +781,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryType: Green
---- !u!225 &533691583
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533691578}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &550241261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1144,6 @@ GameObject:
   - component: {fileID: 1010315842}
   - component: {fileID: 1010315841}
   - component: {fileID: 1010315843}
-  - component: {fileID: 1010315844}
   m_Layer: 5
   m_Name: red
   m_TagString: Untagged
@@ -1291,18 +1222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryType: Red
---- !u!225 &1010315844
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010315839}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1086006327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1234,6 @@ GameObject:
   - component: {fileID: 1086006330}
   - component: {fileID: 1086006329}
   - component: {fileID: 1086006331}
-  - component: {fileID: 1086006332}
   m_Layer: 5
   m_Name: purple
   m_TagString: Untagged
@@ -1394,18 +1312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryType: Purple
---- !u!225 &1086006332
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1086006327}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1233394290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,7 +1562,6 @@ GameObject:
   - component: {fileID: 1654332601}
   - component: {fileID: 1654332600}
   - component: {fileID: 1654332602}
-  - component: {fileID: 1654332603}
   m_Layer: 5
   m_Name: blue
   m_TagString: Untagged
@@ -1735,18 +1640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batteryType: Blue
---- !u!225 &1654332603
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654332598}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1824064140
 GameObject:
   m_ObjectHideFlags: 0
