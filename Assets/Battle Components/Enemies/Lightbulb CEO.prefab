@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5789244540605178365
 MonoBehaviour:
@@ -48,8 +48,8 @@ MonoBehaviour:
   unitLevel: 0
   damage: 4
   fatigue: 0
-  maxHP: 73
-  currentHP: 73
+  maxHP: 66
+  currentHP: 66
   maxEnergy: 0
   currentEnergy: 0
   isSecondPhase: 0
