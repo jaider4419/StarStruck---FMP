@@ -16,7 +16,7 @@ public class UnlockManifolds : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Confined;
         Winner.SetActive(false);
         // Store original sprites and positions of buttons
         originalSprites = new Sprite[buttons.Length];
